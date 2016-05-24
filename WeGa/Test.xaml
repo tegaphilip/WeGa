@@ -1,0 +1,27 @@
+﻿<Window x:Class="WeGa.Test"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Test" Height="300" Width="300">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="100" />
+        </Grid.ColumnDefinitions>
+
+        <Label Content="Row 0 Column 0" Grid.Row="0" Grid.Column="0"></Label>
+        <Label Content="Row 0 Column 1" Grid.Row="0" Grid.Column="1"></Label>
+        <Label Content="Row 1 Column 0" Grid.Row="1" Grid.Column="0"></Label>
+        <Label Content="Row 1 Column 1" Grid.Row="1" Grid.Column="1"></Label>
+        <StackPanel Grid.ColumnSpan="2" Orientation="Horizontal" Height="Auto" Grid.Row="2" Width="Auto">
+            <Button Content="Hey you"></Button>
+            <Button Content="Hey you"></Button>
+        </StackPanel>
+
+
+    </Grid>
+</Window>
