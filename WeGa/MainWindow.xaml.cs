@@ -24,5 +24,17 @@ namespace WeGa
         {
             InitializeComponent();
         }
+
+        private void btnStart_Click(object sender, RoutedEventArgs e)
+        {
+            RequestWindow requestWindow = new RequestWindow()
+            {
+                ShowInTaskbar = false,               // don't show the dialog on the taskbar
+                Topmost = true,                      // ensure we're Always On Top
+                ResizeMode = ResizeMode.NoResize,    // remove excess caption bar buttons
+                Owner = Application.Current.MainWindow,
+            };
+            requestWindow.ShowDialog();
+        }
     }
 }
