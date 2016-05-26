@@ -23,18 +23,27 @@ namespace WeGa
         public MainWindow()
         {
             InitializeComponent();
+            CenterWindowOnScreen();
+        }
+
+        private void CenterWindowOnScreen()
+        {
+            this.Left = (Utils.getScreenWidth() / 2) - (this.Width / 2);
+            this.Top = (Utils.getScreenHeight() / 2) - (this.Height / 2);
         }
 
         private void btnStart_Click(object sender, RoutedEventArgs e)
         {
-            RequestWindow requestWindow = new RequestWindow()
+            LoginWindow loginWindow = new LoginWindow()
             {
                 ShowInTaskbar = false,               // don't show the dialog on the taskbar
                 Topmost = true,                      // ensure we're Always On Top
                 ResizeMode = ResizeMode.NoResize,    // remove excess caption bar buttons
                 Owner = Application.Current.MainWindow,
             };
-            requestWindow.ShowDialog();
+            loginWindow.Left = (Utils.getScreenWidth() / 2) - (loginWindow.Width / 2);
+            loginWindow.Top = (Utils.getScreenHeight() / 2) - (loginWindow.Height / 2);
+            loginWindow.ShowDialog();
         }
     }
 }
