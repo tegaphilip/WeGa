@@ -45,5 +45,19 @@ namespace WeGa
             loginWindow.Top = (Utils.getScreenHeight() / 2) - (loginWindow.Height / 2);
             loginWindow.ShowDialog();
         }
+
+        private void btnRegister_Click(object sender, RoutedEventArgs e)
+        {
+            RegisterWindow registerWindow = new RegisterWindow()
+            {
+                ShowInTaskbar = false,               // don't show the dialog on the taskbar
+                Topmost = true,                      // ensure we're Always On Top
+                ResizeMode = ResizeMode.NoResize,    // remove excess caption bar buttons
+                Owner = Application.Current.MainWindow
+            };
+            registerWindow.Left = (Utils.getScreenWidth() / 2) - (registerWindow.Width / 2);
+            registerWindow.Top = (Utils.getScreenHeight() / 2) - (registerWindow.Height / 2);
+            registerWindow.ShowDialog();
+        }
     }
 }

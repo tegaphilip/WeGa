@@ -13,6 +13,7 @@
             <Setter Property="Background" Value="Gray" />
             <Setter Property="Label.FontFamily" Value="Trebuchet MS"></Setter>
             <Setter Property="Label.FontSize" Value="18"></Setter>
+           
         </Style>
 
         <!-- Login Textbox Style style -->
