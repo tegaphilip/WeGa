@@ -4,7 +4,6 @@
         Title="WeGaNew" Height="400" Width="500">
 
     <Grid>
-        <Button Content="Start A Game" Name="btnStart" Margin="182,91,175,199" Click="btnStart_Click"/>
-        <Button Content="Exit" HorizontalAlignment="Left" Margin="182,159,0,0" VerticalAlignment="Top" Width="160" Height="28"/>
+        <Button Content="Login" Name="btnStart" Margin="182,91,175,199" Click="btnStart_Click" Style="{StaticResource buttonStyle}"/>
     </Grid>
 </Window>

@@ -3,6 +3,46 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <!-- game Button style -->
+        <Style x:Key="gameButtonStyle" TargetType="{x:Type Button}">
+            <Setter Property="Width" Value="125" />
+            <Setter Property="Height" Value="50" />
+            <Setter Property="Margin" Value="0,10,0,0" />
+            <Setter Property="HorizontalAlignment" Value="Right" />
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="Background" Value="Gray" />
+            <Setter Property="Label.FontFamily" Value="Trebuchet MS"></Setter>
+            <Setter Property="Label.FontSize" Value="18"></Setter>
+        </Style>
+
+        <!-- Login Textbox Style style -->
+        <Style x:Key="loginTextboxStyle" TargetType="{x:Type TextBox}">
+            <Setter Property="Width" Value="105" />
+            <Setter Property="Height" Value="23" />
+            <Setter Property="Margin" Value="10,4,0,0" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="VerticalAlignment" Value="Top" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+        </Style>
+
+        <!-- Login  Password style -->
+        <Style x:Key="loginPasswordStyle" TargetType="{x:Type PasswordBox}">
+            <Setter Property="Width" Value="105" />
+            <Setter Property="Height" Value="23" />
+            <Setter Property="Margin" Value="10,4,0,0" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="VerticalAlignment" Value="Top" />
+        </Style>
+
+        <!-- Button style -->
+        <Style x:Key="buttonStyle" TargetType="{x:Type Button}">
+            <Setter Property="Width" Value="105" />
+            <Setter Property="Height" Value="23" />
+            <Setter Property="Margin" Value="10,4,0,0" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="Background" Value="#4E87D4" />
+            <Setter Property="Label.FontFamily" Value="Trebuchet MS"></Setter>
+        </Style>
     </Application.Resources>
 </Application>
