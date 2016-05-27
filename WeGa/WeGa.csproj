@@ -36,6 +36,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -124,6 +125,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="anagram.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WeGaService\WeGaService.csproj">
+      <Project>{b806a25c-7265-485b-9f2b-68eb5a005d14}</Project>
+      <Name>WeGaService</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
