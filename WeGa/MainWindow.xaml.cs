@@ -59,5 +59,11 @@ namespace WeGa
             registerWindow.Top = (Utils.getScreenHeight() / 2) - (registerWindow.Height / 2);
             registerWindow.ShowDialog();
         }
+
+        private void btnGameBoard_Click(object sender, RoutedEventArgs e)
+        {
+            GameBoard gb = new GameBoard();
+            gb.Show();
+        }
     }
 }

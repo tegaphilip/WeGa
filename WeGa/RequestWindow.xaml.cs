@@ -23,5 +23,12 @@ namespace WeGa
         {
             InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            //send game request
+            //string = "INSERT INTO games Values()";--create a game
+            Window gameBorad = new GameBoard();
+        }
     }
 }
