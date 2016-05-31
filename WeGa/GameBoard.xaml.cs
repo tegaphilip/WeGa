@@ -66,12 +66,14 @@ namespace WeGa
             //Commented to see results after click;
 
             //message.Content = "";
+            //Check if is empty
             if (isEmpty())
             {
                 message.Content += "From btnAdd_Click: You haven't enter any words!\n";
             }
             else
             {
+                //Check if is a singel letter
                 if (isSingleLetter())
                 {
                     message.Content += "From btnAdd_Click: Word with a single letter dosn't count! Buddy! \n";
@@ -96,7 +98,6 @@ namespace WeGa
 
                      Grid.SetRow(newWord, wordList.Children.Count);
                      Grid.SetColumn(newWord, 0);
-
                     
                 }
  
@@ -141,7 +142,7 @@ namespace WeGa
         //Concatenate the letters to a word.
         private string getNewWord()
         {
-            string newWord ="SIGNAL+";
+            string newWord ="New+";
             var list = this.wordPanel.Children;
             foreach (UIElement elm in list)
             {
@@ -152,6 +153,20 @@ namespace WeGa
                     break;
             }
             return newWord;
+        }
+
+        private bool isPlayed(string wordSubmited)
+        {
+            var list = this.wordList.Children;
+            foreach (UIElement elm in list)
+            {
+                Button btn = (Button) elm;
+                if (!btn.Content.Equals(wordList))
+                    return true;
+                else
+                    break;
+            } 
+            return false;
         }
     }
 }

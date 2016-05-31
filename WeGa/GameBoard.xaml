@@ -37,10 +37,9 @@
         </Grid>
 
         <Label Content="Message:" DockPanel.Dock="Top" Name="message"/>
-        <Grid Name="wordPanel" ShowGridLines="True" VerticalAlignment="Center">
+        <Grid Name="wordPanel" ShowGridLines="True" DockPanel.Dock="Top" Margin="0,100,0,0">
             <Grid.RowDefinitions>
                 <RowDefinition />
-
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
@@ -53,16 +52,15 @@
             </Grid.ColumnDefinitions>
 
             <Button Grid.Column="0" Content=""  Click="btn_word_Click"/>
-            <Button Grid.Column="1" Content=""  Click="btn_word_Click" Height="20" VerticalAlignment="Top"/>
+            <Button Grid.Column="1" Content=""  Click="btn_word_Click"/>
             <Button Grid.Column="2" Content=""  Click="btn_word_Click"/>
             <Button Grid.Column="3" Content=""  Click="btn_word_Click"/>
             <Button Grid.Column="4" Content=""  Click="btn_word_Click"/>
             <Button Grid.Column="5" Content=""  Click="btn_word_Click"/>
             <Button Grid.Column="6" Content=""  Click="btn_word_Click"/>
-            <Button Grid.Column="7" Content=""  Click="btn_word_Click"/>
-            <Button  Content="btnAdd" Click="btnAdd_Click" Margin="16,54,34,-74" />
-            <Button  Content="btnReset" Click="btnReset_Click"   Margin="0,19,49,-39" />
+            <Button Grid.Column="7" Content=""  Click="btn_word_Click"/>         
         </Grid>
-
+        <Button Content="btnReset" Click="btnReset_Click" Width="70" Height="30"  />
+        <Button Content="btnAdd" Click="btnAdd_Click" Width="70" Height="30" />
     </DockPanel>
 </Window>
