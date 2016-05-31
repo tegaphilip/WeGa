@@ -6,15 +6,27 @@
     <DockPanel>
         <StackPanel DockPanel.Dock="Left" Height="Auto" Margin="5" VerticalAlignment="Center">
             <Button Content="Letters"/>
-            <ListBox Height="Auto" Width="Auto">
-                <Button Width="50" Click="btn_Letter_Click" Content="a"/>
-                <Button Width="50" Click="btn_Letter_Click" Content="b"/>
-                <Button Width="50" Click="btn_Letter_Click" Content="c"/>
-                <Button Width="50" Click="btn_Letter_Click" Content="d"/>
-                <Button Width="50" Click="btn_Letter_Click" Content="e"/>
-                <Button Width="50" Click="btn_Letter_Click" Content="f"/>
-                <Button Width="50" Click="btn_Letter_Click" Content="g"/>
-            </ListBox>
+            <Grid Name="lettersPanel" Height="Auto" Width="Auto">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="30" />
+                </Grid.RowDefinitions>
+                <Button Grid.Row="0"  Click="btn_Letter_Click" />
+                <Button Grid.Row="1"  Click="btn_Letter_Click" />
+                <Button Grid.Row="2"  Click="btn_Letter_Click" />
+                <Button Grid.Row="3"  Click="btn_Letter_Click" />
+                <Button Grid.Row="4"  Click="btn_Letter_Click" />
+                <Button Grid.Row="5"  Click="btn_Letter_Click" />
+                <Button Grid.Row="6"  Click="btn_Letter_Click" />
+            </Grid>
         </StackPanel>
 
 
@@ -25,7 +37,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="50" />
             </Grid.RowDefinitions>
-            <Label Content="Timer" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Button Content="Timer" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Grid>
 
         <Grid DockPanel.Dock="Top" Margin="5" Height="60">
@@ -37,7 +49,7 @@
         </Grid>
 
         <Label Content="Message:" DockPanel.Dock="Top" Name="message"/>
-        <Grid Name="wordPanel" ShowGridLines="True" DockPanel.Dock="Top" Margin="0,100,0,0">
+        <Grid Name="wordPanel" ShowGridLines="True" DockPanel.Dock="Top" Margin="0,70,0,0">
             <Grid.RowDefinitions>
                 <RowDefinition />
             </Grid.RowDefinitions>
@@ -62,5 +74,6 @@
         </Grid>
         <Button Content="btnReset" Click="btnReset_Click" Width="70" Height="30"  />
         <Button Content="btnAdd" Click="btnAdd_Click" Width="70" Height="30" />
+        <Button Content="btnResine" Width="70" Height="30" />
     </DockPanel>
 </Window>

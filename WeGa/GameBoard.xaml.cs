@@ -19,99 +19,83 @@ namespace WeGa
     /// </summary>
     public partial class GameBoard : Window
     {
+        private string letters;
 
-        int i = 1;
         public GameBoard()
         {
-            //DockPanel dp = new DockPanel();
-            //StackPanel sp = new StackPanel();
-
-            //Button btn = new Button();
-            //Button btn2 = new Button();
-            //btn.Content = "Test adding stackpanel in to dockpanel";
-            //sp.Children.Add(btn);
-            //sp.Children.Add(btn2);
-
-            //DockPanel.SetDock(sp, Dock.Left);
             InitializeComponent();
+            letters = Utils.getLetters();
+            setLettersPanel();
         }
 
 
         //Get the letter by the letter_button's content, set to content of the first empty word_button 
         private void btn_Letter_Click(object sender, RoutedEventArgs e)
-        { 
-            Button btn_clicked = (Button)sender;
-            char letter =  char.Parse(btn_clicked.Content.ToString());
-            
-            //set letter to word_button
-            var list = this.wordPanel.Children;
-            foreach(UIElement elm in list) {
-                Button btn_to_change = (Button)elm;
-                if (btn_to_change.Content.Equals(""))
+        {         
+            Button btn_clicked = (Button) sender;
+            if (btn_clicked.Content.ToString() != "") { 
+                char letter =  char.Parse(btn_clicked.Content.ToString());
+                btn_clicked.Content = "";
+                //set letter to word_button
+                var list = this.wordPanel.Children;
+                foreach (Button btn in list)
                 {
-                    btn_to_change.Content = letter;
-                    break;
+                    if (btn.Content.Equals(""))
+                    {
+                        btn.Content = letter;
+                        break;
+                    }
                 }
             }
         }
 
+        //Clear content of btn clicked and set the value back to letters panel
         private void btn_word_Click(object sender, RoutedEventArgs e)
         {
-            Button btn_clicked = (Button)sender;
-            btn_clicked.Content = "";
+            Button btn_clicked = (Button) sender;
+            if (btn_clicked.Content.ToString() != "")
+            {
+                btn_clicked.Content = "";
+                setLettersPanel();
+            }
         }
 
+
+        //There is a method called isNullOrWhiteSpace in c#
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            //Commented to see results after click;
-
-            //message.Content = "";
-            //Check if is empty
-            if (isEmpty())
-            {
-                message.Content += "From btnAdd_Click: You haven't enter any words!\n";
-            }
-            else
-            {
-                //Check if is a singel letter
-                if (isSingleLetter())
+            message.Content = "";
+            //Check if is empty and 
+            if (!isEmpty()){
+                if (!isSingleLetter())
                 {
-                    message.Content += "From btnAdd_Click: Word with a single letter dosn't count! Buddy! \n";
+                    if (!isPlayed(getNewWord())) 
+                    { 
+                        message.Content += "The new WORD is " + getNewWord() + "\n";
+                        setWord();
+                        setLettersPanel();
+                    }
+
                 }
-                else
-                {
-                    //Need to delete at the end
-                    message.Content += "Not empty \n";
-                    message.Content += "The new WORD is " + getNewWord() + i++ +"\n";
-
-                    Button newWord = new Button();
-                    newWord.Height = 30;
-                    newWord.Width = 40;
-                    newWord.Content = getNewWord();
-
-                    RowDefinition newRow = new RowDefinition();
-                    newRow.Height = new GridLength(50);
-                    wordList.RowDefinitions.Add(newRow);
-                    wordList.Children.Add(newWord);
-
-                     message.Content += wordList.Children.Count.ToString() + "\n";
-
-                     Grid.SetRow(newWord, wordList.Children.Count);
-                     Grid.SetColumn(newWord, 0);
-                    
-                }
- 
             }
         }
 
         //Reset all letters chosed.
         private void btnReset_Click(object sender, RoutedEventArgs e)
         {
+            int i = 0;
             var btns = wordPanel.Children;
             foreach (Button btn in btns)
             {
                 btn.Content = "";
             }
+            btns = lettersPanel.Children;
+            foreach (Button btn in btns)
+            {
+                btn.Content = letters[i];
+                i++;
+            }
+
         }
 
         //Check if the word to be added is empty.
@@ -121,6 +105,7 @@ namespace WeGa
             //Need to be deleted at the end.
             if (element.Content.Equals("") || element == null)
             {
+                message.Content += "From btnAdd_Click: You haven't enter any words!\n";
                 return true;
             }
             return false;
@@ -131,8 +116,11 @@ namespace WeGa
         {
             Button element = wordPanel.Children.Cast<Button>().FirstOrDefault(e => Grid.GetColumn(e) == 1 && Grid.GetRow(e) == 0);
             if (!isEmpty()) {
-                if (element.Content.Equals("") ||element == null)
+                if (element.Content.Equals("") || element == null)
+                {
+                    message.Content += "From btnAdd_Click: A single letter dosent count!\n";
                     return true;
+                }
                 else
                     return false;
             }        
@@ -142,31 +130,63 @@ namespace WeGa
         //Concatenate the letters to a word.
         private string getNewWord()
         {
-            string newWord ="New+";
+            string newWord ="";
             var list = this.wordPanel.Children;
-            foreach (UIElement elm in list)
+            foreach (Button btn in list)
             {
-                Button btn_to_change = (Button) elm;
-                if (!btn_to_change.Content.Equals(""))
-                    newWord += btn_to_change.Content;
+                if (!btn.Content.Equals(""))
+                    newWord += btn.Content;
                 else
                     break;
             }
             return newWord;
         }
 
+        //Check if the word has been added
         private bool isPlayed(string wordSubmited)
         {
             var list = this.wordList.Children;
-            foreach (UIElement elm in list)
+            foreach (Button btn in list)
             {
-                Button btn = (Button) elm;
-                if (!btn.Content.Equals(wordList))
+                if (btn.Content.Equals(wordSubmited))
+                {
+                    message.Content += "You have added this word!";
                     return true;
-                else
-                    break;
+                }
             } 
             return false;
+        }
+
+        //Set the new word to word list.
+        private void setWord()
+        {
+            Button newWord = new Button();
+            newWord.Height = 30;
+            newWord.Width = 50;
+            newWord.Content = getNewWord();
+
+            RowDefinition newRow = new RowDefinition();
+            newRow.Height = new GridLength(50);
+            wordList.RowDefinitions.Add(newRow);
+            wordList.Children.Add(newWord);
+
+            message.Content += wordList.Children.Count.ToString() + "\n";
+
+            Grid.SetRow(newWord, wordList.Children.Count);
+            Grid.SetColumn(newWord, 0);
+        }
+
+        //Set the shuffered letters
+        private void setLettersPanel()
+        {
+            var list = this.lettersPanel.Children;
+            int i = 0;
+            foreach (Button btn in list)
+            {
+                //MessageBox.Show(btn.ToString());         
+                btn.Content = letters[i];
+                i++;
+            }
         }
     }
 }
