@@ -4,14 +4,21 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
+using WeGaService.models;
 
 namespace WeGaService
 {
     public class GameService : IGameService
     {
-        public string GetData(int value)
+        public bool Login(string username, string password)
         {
-            return string.Format("You entered: {0}", value);
+            var user = new DBConn().login(username, password);
+            return user != null;
+        }
+
+        public bool RegisterPlayer(string username, string nickname, string password)
+        {
+            return new DBConn().Register(username, nickname, password);
         }
     }
 }

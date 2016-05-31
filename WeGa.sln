@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeGa", "WeGa\WeGa.csproj", "{DCB2EB83-62B4-4BF0-8C91-6A2619BFB8C9}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B806A25C-7265-485B-9F2B-68EB5A005D14} = {B806A25C-7265-485B-9F2B-68EB5A005D14}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeGaService", "WeGaService\WeGaService.csproj", "{B806A25C-7265-485B-9F2B-68EB5A005D14}"
 EndProject

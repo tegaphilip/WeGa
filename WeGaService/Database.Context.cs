@@ -13,9 +13,9 @@ namespace WeGaService
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class wegaEntities : DbContext
+    public partial class WegaEntities : DbContext
     {
-        public wegaEntities()
+        public WegaEntities()
             : base("name=wegaEntities")
         {
         }
@@ -25,5 +25,9 @@ namespace WeGaService
             throw new UnintentionalCodeFirstException();
         }
     
+        public DbSet<game_words_history> game_words_history { get; set; }
+        public DbSet<game> games { get; set; }
+        public DbSet<player> players { get; set; }
+        public DbSet<word> words { get; set; }
     }
 }
