@@ -34,6 +34,11 @@ namespace WeGa
             bool login = sc.Login(un, un);
 
             MessageBox.Show(login.ToString());
+            
+            this.Close();
+            RequestWindow rw = new RequestWindow();
+            rw.Show();
+      
         }
     }
 }

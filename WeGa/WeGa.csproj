@@ -133,6 +133,9 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+    <None Include="Service References\GameServiceReference\Arrays.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\GameServiceReference\service.wsdl" />
     <None Include="Service References\GameServiceReference\service.xsd">
       <SubType>Designer</SubType>

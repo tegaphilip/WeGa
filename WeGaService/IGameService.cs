@@ -16,5 +16,8 @@ namespace WeGaService
 
         [OperationContract]
         bool RegisterPlayer(string username, string nickname, string password);
+
+        [OperationContract]
+        List<string> getPlayersNm();
     }
 }

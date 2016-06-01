@@ -51,5 +51,19 @@ namespace WeGaService.models
                 }
             }
         }
+
+        public List<string> getPlayersNm()
+        {
+            using (WegaEntities db = new WegaEntities())
+            {
+                List<player> pl = db.players.ToList();
+                List<string> pname = new List<string>();
+                foreach (player p in pl)
+                {
+                    pname.Add(p.nickname);
+                }
+                return pname;
+            }
+        }
     }
 }

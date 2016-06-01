@@ -20,5 +20,10 @@ namespace WeGaService
         {
             return new DBConn().Register(username, nickname, password);
         }
+
+        public List<string> getPlayersNm()
+        {
+            return new DBConn().getPlayersNm();
+        }
     }
 }

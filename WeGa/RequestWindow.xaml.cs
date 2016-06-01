@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WeGa.library;
 
 namespace WeGa
 {
@@ -19,9 +20,13 @@ namespace WeGa
     /// </summary>
     public partial class RequestWindow : Window
     {
+        ServiceClient sc;
+
         public RequestWindow()
         {
+            sc = new ServiceClient();
             InitializeComponent();
+            setPlayerList();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -29,6 +34,12 @@ namespace WeGa
             //send game request
             //string = "INSERT INTO games Values()";--create a game
             Window gameBorad = new GameBoard();
+        }
+
+        private void setPlayerList()
+        {
+            List<string> pl = sc.getPlayersNm();
+            
         }
     }
 }

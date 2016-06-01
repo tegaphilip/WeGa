@@ -60,10 +60,6 @@ namespace WeGa
             registerWindow.ShowDialog();
         }
 
-        private void btnGameBoard_Click(object sender, RoutedEventArgs e)
-        {
-            GameBoard gb = new GameBoard();
-            gb.Show();
-        }
+
     }
 }

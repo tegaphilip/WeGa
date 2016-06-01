@@ -21,7 +21,7 @@
             <Button Content="Hey you"></Button>
             <Button Content="Hey you"></Button>
         </StackPanel>
-        <Button x:Name="but" Content="Button" Grid.Column="1" HorizontalAlignment="Left" Margin="52,50,-26,-28" Grid.Row="2" VerticalAlignment="Top" Width="75"/>
+        <Button Content="Button" Grid.Column="1" Margin="52,50,-26,-26" Grid.Row="2" VerticalAlignment="Top" HorizontalAlignment="Left" Width="75" Click="Button_Click"/>
 
 
     </Grid>

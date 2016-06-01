@@ -6,6 +6,5 @@
     <Grid>
         <Button Content="Login" Name="btnStart" Margin="110,119,0,213" Click="btnStart_Click" Style="{StaticResource buttonStyle}" Height="Auto"/>
         <Button Content="Register" Name="btnRegister" Margin="249,119,0,213" Click="btnRegister_Click" Style="{StaticResource buttonStyle}" RenderTransformOrigin="1.35,0.966" Height="Auto"/>
-        <Button Content="GameBoard" x:Name="btnGameBoard" Margin="110,189,0,143" Click="btnGameBoard_Click" Style="{StaticResource buttonStyle}" Height="Auto"/>
     </Grid>
 </Window>

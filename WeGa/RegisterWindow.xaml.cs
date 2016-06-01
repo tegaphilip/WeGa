@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WeGa.library;
 
 namespace WeGa
 {
@@ -28,25 +29,30 @@ namespace WeGa
         {
             message.Content = "";
 
-            if (nickname.Text.Equals(""))
+            if (nickname.Text.Trim().Equals(""))
             {
                 message.Content += "Please enter your nickname~~ \n";
             }
-            if (username.Text.Equals(""))
+            else if (username.Text.Trim().Equals(""))
             {
                 message.Content += "Please enter your username~~ \n";
             }
-            if (password.Password.Equals(""))
+            else if (password.Password.Trim().Equals(""))
             {
                 message.Content += "Please enter your password~~ \n";
-            }
-            if (passwordRepeat.Password.Equals(""))
-            {
-                message.Content += "Repeat your password please~~ \n";
-            }
-            if (password.Password != passwordRepeat.Password)
+            }      
+            else if (password.Password != passwordRepeat.Password)
             {
                 message.Content += "Your passwords are not the same! \n";
+            }
+            else
+            {
+                ServiceClient sc = new ServiceClient();
+                bool res = sc.Register(username.Text, password.Password, nickname.Text);
+
+                MessageBoxButton mbb = new MessageBoxButton();
+                MessageBox.Show(this, res.ToString(), "title", mbb);
+
             }
 
         }
