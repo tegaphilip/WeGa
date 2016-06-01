@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c07357230eb44b6f9a0b9e0b57c8b2fc" Name="Diagram1">
+        <EntityTypeShape EntityType="wegaModel.game_words_history" Width="1.5" PointX="5.25" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="wegaModel.game" Width="1.5" PointX="3" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="wegaModel.player" Width="1.5" PointX="0.75" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="wegaModel.word" Width="1.5" PointX="3" PointY="3.625" IsExpanded="true" />
+        <AssociationConnector Association="wegaModel.FK_gwh_game_id" ManuallyRouted="false" />
+        <AssociationConnector Association="wegaModel.FK_gwh_player_id" ManuallyRouted="false" />
+        <AssociationConnector Association="wegaModel.Fk_gwh_word_id" ManuallyRouted="false" />
+        <AssociationConnector Association="wegaModel.FK_gms_player1" ManuallyRouted="false" />
+        <AssociationConnector Association="wegaModel.FK_gms_player2" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
