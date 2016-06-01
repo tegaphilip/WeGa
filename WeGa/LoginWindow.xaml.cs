@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WeGa.library;
 
 namespace WeGa
 {
@@ -28,6 +29,11 @@ namespace WeGa
         {
             String un = username.Text;
             MessageBox.Show(un);
+
+            ServiceClient sc = new ServiceClient();
+            bool login = sc.Login(un, un);
+
+            MessageBox.Show(login.ToString());
         }
     }
 }
