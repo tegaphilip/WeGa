@@ -16,7 +16,7 @@ namespace WeGaService
     public partial class WegaEntities : DbContext
     {
         public WegaEntities()
-            : base("name=wegaEntities")
+            : base("name=WegaEntities")
         {
         }
     

@@ -21,7 +21,13 @@ namespace WeGa.library
             proxy = channelFactory.CreateChannel(); 
         }
 
-        public bool Login(string username, string password)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        public Dictionary<String, String> Login(string username, string password)
         {
             try
             {
@@ -29,7 +35,7 @@ namespace WeGa.library
             }
             catch
             {
-                return false;
+                return null;
             }
         }
 

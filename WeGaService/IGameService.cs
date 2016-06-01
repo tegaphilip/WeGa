@@ -12,7 +12,7 @@ namespace WeGaService
     public interface IGameService
     {
         [OperationContract]
-        bool Login(string username, string password);
+        Dictionary<String, String> Login(string username, string password);
 
         [OperationContract]
         bool RegisterPlayer(string username, string nickname, string password);

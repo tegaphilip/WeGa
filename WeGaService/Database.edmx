@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="wegaModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.6" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="WegaModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.6" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="game_words_history">
           <Key>
             <PropertyRef Name="gwh_id" />
@@ -35,8 +35,8 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="nickname" Type="varchar" MaxLength="45" Nullable="false" />
-          <Property Name="username" Type="varchar" MaxLength="45" Nullable="false" />
-          <Property Name="password" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="username" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="255" Nullable="false" />
         </EntityType>
         <EntityType Name="words">
           <Key>
@@ -105,7 +105,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="wegaModelStoreContainer">
+        <EntityContainer Name="WegaModelStoreContainer">
           <EntitySet Name="game_words_history" EntityType="Self.game_words_history" Schema="wega" store:Type="Tables" />
           <EntitySet Name="games" EntityType="Self.games" Schema="wega" store:Type="Tables" />
           <EntitySet Name="players" EntityType="Self.players" Schema="wega" store:Type="Tables" />
@@ -135,7 +135,7 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="wegaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="WegaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="game_words_history">
           <Key>
             <PropertyRef Name="gwh_id" />
@@ -172,8 +172,8 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="nickname" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="username" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="password" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="username" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="game_words_history" Relationship="Self.FK_gwh_player_id" FromRole="players" ToRole="game_words_history" />
           <NavigationProperty Name="games" Relationship="Self.FK_gms_player1" FromRole="players" ToRole="games" />
           <NavigationProperty Name="games1" Relationship="Self.FK_gms_player2" FromRole="players" ToRole="games" />
@@ -246,7 +246,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="wegaEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="WegaEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="game_words_history" EntityType="Self.game_words_history" />
           <EntitySet Name="games" EntityType="Self.game" />
           <EntitySet Name="players" EntityType="Self.player" />
@@ -277,9 +277,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="wegaModelStoreContainer" CdmEntityContainer="wegaEntities">
+        <EntityContainerMapping StorageEntityContainer="WegaModelStoreContainer" CdmEntityContainer="WegaEntities">
           <EntitySetMapping Name="game_words_history">
-            <EntityTypeMapping TypeName="wegaModel.game_words_history">
+            <EntityTypeMapping TypeName="WegaModel.game_words_history">
               <MappingFragment StoreEntitySet="game_words_history">
                 <ScalarProperty Name="gwh_id" ColumnName="gwh_id" />
                 <ScalarProperty Name="gwh_game_id" ColumnName="gwh_game_id" />
@@ -290,7 +290,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="games">
-            <EntityTypeMapping TypeName="wegaModel.game">
+            <EntityTypeMapping TypeName="WegaModel.game">
               <MappingFragment StoreEntitySet="games">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="player1_id" ColumnName="player1_id" />
@@ -305,7 +305,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="players">
-            <EntityTypeMapping TypeName="wegaModel.player">
+            <EntityTypeMapping TypeName="WegaModel.player">
               <MappingFragment StoreEntitySet="players">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="nickname" ColumnName="nickname" />
@@ -315,7 +315,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="words">
-            <EntityTypeMapping TypeName="wegaModel.word">
+            <EntityTypeMapping TypeName="WegaModel.word">
               <MappingFragment StoreEntitySet="words">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="word1" ColumnName="word" />

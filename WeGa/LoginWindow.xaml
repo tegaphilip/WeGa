@@ -1,32 +1,30 @@
 ﻿<Window x:Class="WeGa.LoginWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Login to Play" Height="200" Width="300" Background="#FFF5AEA3">
-    <Grid Margin="10,0,10,10">
-        <!--<Grid.Background>
-            <ImageBrush ImageSource="anagram.png"  />
-        </Grid.Background>-->
+        Title="Login" Height="250" Width="400">
 
+    <Grid Margin="10,0,10,10">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition />
+            <ColumnDefinition Width="193*"/>
+            <ColumnDefinition Width="300*" />
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
             <RowDefinition Height="40" />
-            <RowDefinition Height="30" />
-            <RowDefinition Height="30" />
-            <RowDefinition Height="30" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
         </Grid.RowDefinitions>
-
-        <Border Grid.Column="0" Grid.ColumnSpan="2" Padding="5" Background="#4E87D4">
-            <Label VerticalAlignment="Center" Foreground="White">Login</Label>
+        <Label Content="Login" HorizontalAlignment="Left" Margin="1,10,0,0" VerticalAlignment="Top" Height="40" Width="209" FontSize="25" Grid.Column="1" Grid.RowSpan="2"/>
+        <Label Content="Username:" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" />
+        <Label Content="Password:" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" />
+        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Center" Width="160" Name="username" Grid.Column="1" Grid.Row="1"/>
+        <PasswordBox HorizontalAlignment="Left" Height="23" VerticalAlignment="Center" Width="160" Name="password" Grid.Column="1" Grid.Row="2"/>
+        <Button Name="btnSubmit" Content="Login" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Click="btnLogin_Click" Style="{StaticResource buttonStyle}" Grid.Column="1" Grid.Row="3"/>
+        <Border Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2" Padding="5">
+            <Label Content="" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="Red" Name="message" />
         </Border>
-
-        <Label Grid.Column="0" Grid.Row="1">Username:</Label>
-        <Label Grid.Column="0" Grid.Row="2">Pasword:</Label>
-        <TextBox x:Name="username"  Grid.Column="1" Grid.Row="1"  Style="{StaticResource loginTextboxStyle}" Text=""/>
-        <PasswordBox x:Name="password" Grid.Column="1" Grid.Row="2" Style="{StaticResource loginPasswordStyle}" />
-        <Button x:Name="btnLogin" Grid.Column="1" Grid.Row="3" Style="{StaticResource buttonStyle}" Content="Login" Click="btnLogin_Click"/>
     </Grid>
 </Window>

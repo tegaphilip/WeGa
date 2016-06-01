@@ -5,15 +5,34 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
 using WeGaService.models;
+using WeGaService.libraries;
+using System.ServiceModel.Web;
 
 namespace WeGaService
 {
     public class GameService : IGameService
     {
-        public bool Login(string username, string password)
+        const string ERROR = "error";
+        const string SUCCESS = "success";
+
+        public Dictionary<String, String> Login(string username, string password)
         {
-            var user = new DBConn().login(username, password);
-            return user != null;
+            Dictionary<String, String> user = new Dictionary<string, string>();
+            user["status"] = ERROR;
+
+            var p = new DBConn().login(username, password);
+            if (p == null)
+            {
+                user["message"] = DBConn.getLatestErrorMessage();
+            }
+            else
+            {
+                user["status"] = SUCCESS;
+                user["nickname"] = p.nickname;
+                user["username"] = p.username;
+            }
+
+            return user;
         }
 
         public bool RegisterPlayer(string username, string nickname, string password)

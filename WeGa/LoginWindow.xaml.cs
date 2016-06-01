@@ -20,25 +20,49 @@ namespace WeGa
     /// </summary>
     public partial class LoginWindow : Window
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public LoginWindow()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
             String un = username.Text;
-            MessageBox.Show(un);
+            String pass = password.Password;
 
-            ServiceClient sc = new ServiceClient();
-            bool login = sc.Login(un, un);
+            if (un.Trim() == "" || pass.Trim() == "")
+            {
+                message.Content = "please fill in all fields";
+                return;
+            }
 
+<<<<<<< HEAD
             MessageBox.Show(login.ToString());
             
             this.Close();
             RequestWindow rw = new RequestWindow();
             rw.Show();
       
+=======
+            ServiceClient sc = new ServiceClient();
+            Dictionary<String, String> login = sc.Login(un, pass);
+            if (login["status"] == Constants.ERROR)
+            {
+                message.Content = login["message"];
+            }
+            else
+            {
+                message.Content = "Welcome boss!!!!!!! >> " + login["nickname"];
+            }
+>>>>>>> 37c928788076ee788202bf4fc71d081314249bd5
         }
     }
 }
