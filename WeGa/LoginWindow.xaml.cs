@@ -53,6 +53,14 @@ namespace WeGa
                 message.Content = "Welcome boss!!!!!!! >> " + login["nickname"];
             }
 
+            Application.Current.Resources["username"] = un;
+            List<string> nickNameList = sc.getPlayersNm();
+            foreach (string nm in nickNameList)
+            {
+                if (nm == un)
+                    Application.Current.Resources["nickname"] = nm;
+            }
+
             this.Close();
             RequestWindow rw = new RequestWindow();
             rw.Left = (Utils.getScreenWidth() / 2) - (this.Width / 2);
