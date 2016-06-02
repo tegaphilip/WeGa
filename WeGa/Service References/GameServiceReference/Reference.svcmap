@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="37d0bb00-af91-470b-8abd-ef4603bd3bba" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="e00119bb-5b88-4da1-9bcb-a4e49808221e" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -22,14 +22,10 @@
     <MetadataSource Address="http://localhost:8733/Design_Time_Addresses/WeGaService/Service1/mex" Protocol="mex" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="17ae569a-6f8c-4ee8-a580-1aeb85492e4d" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/WeGaService/Service1/mex" />
-    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="b85414c8-9563-4e14-a6dd-4d34f093abcb" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/WeGaService/Service1/mex" />
-    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="c9bd9d63-c1ba-4bf1-ac33-95eaa7e5c9ea" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/WeGaService/Service1/mex" />
-    <MetadataFile FileName="Arrays.xsd" MetadataType="Schema" ID="81819d9e-ffc3-4042-bdd3-4b6aa6491435" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/WeGaService/Service1/mex" />
-    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="59d65ab5-d260-433c-a5e4-a7b9ef237187" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/WeGaService/Service1/mex" />
-    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="1d5379a5-e7fd-4f45-b75a-aef9766cfed1" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/WeGaService/Service1/mex" />
-    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="3cc3fc03-8f14-4030-8eac-ac097426db26" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/WeGaService/Service1/mex" />
-    <MetadataFile FileName="Arrays.xsd" MetadataType="Schema" ID="6cb41742-dafc-48ef-b916-afceaf90af22" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/WeGaService/Service1/mex" />
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="5dc65660-7745-42ea-b002-c5aef0f0f160" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/WeGaService/Service1/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="11888f69-d9f5-41ff-a973-26a38cf4d8c4" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/WeGaService/Service1/mex" />
+    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="994709b7-4085-445f-8692-397ca86983cf" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/WeGaService/Service1/mex" />
+    <MetadataFile FileName="Arrays.xsd" MetadataType="Schema" ID="57d5a7fe-5d7f-4cac-8196-2347d1c7bc35" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/WeGaService/Service1/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

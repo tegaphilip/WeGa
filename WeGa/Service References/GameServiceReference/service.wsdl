@@ -25,6 +25,12 @@
   <wsdl:message name="IGameService_getPlayersNm_OutputMessage">
     <wsdl:part name="parameters" element="tns:getPlayersNmResponse" />
   </wsdl:message>
+  <wsdl:message name="IGameService_CreateGame_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateGame" />
+  </wsdl:message>
+  <wsdl:message name="IGameService_CreateGame_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateGameResponse" />
+  </wsdl:message>
   <wsdl:portType name="IGameService">
     <wsdl:operation name="Login">
       <wsdl:input wsaw:Action="http://tempuri.org/IGameService/Login" message="tns:IGameService_Login_InputMessage" />
@@ -37,6 +43,10 @@
     <wsdl:operation name="getPlayersNm">
       <wsdl:input wsaw:Action="http://tempuri.org/IGameService/getPlayersNm" message="tns:IGameService_getPlayersNm_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IGameService/getPlayersNmResponse" message="tns:IGameService_getPlayersNm_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateGame">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGameService/CreateGame" message="tns:IGameService_CreateGame_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGameService/CreateGameResponse" message="tns:IGameService_CreateGame_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IGameService" type="tns:IGameService">
@@ -61,6 +71,15 @@
     </wsdl:operation>
     <wsdl:operation name="getPlayersNm">
       <soap:operation soapAction="http://tempuri.org/IGameService/getPlayersNm" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateGame">
+      <soap:operation soapAction="http://tempuri.org/IGameService/CreateGame" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
