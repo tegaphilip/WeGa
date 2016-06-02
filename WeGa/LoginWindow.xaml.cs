@@ -35,20 +35,18 @@ namespace WeGa
         /// <param name="e"></param>
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            String un = username.Text;
-            String pass = password.Password;
-
-            if (un.Trim() == "" || pass.Trim() == "")
+            if (username.Text.Trim() == "" || password.Password.Trim() == "")
             {
                 message.Content = "please fill in all fields";
                 return;
             }
 
             ServiceClient sc = new ServiceClient();
-            Dictionary<String, String> login = sc.Login(un, pass);
+            Dictionary<String, String> login = sc.Login(username.Text, password.Password);
             if (login["status"] == Constants.ERROR)
             {
                 message.Content = login["message"];
+                return;
             }
             else
             {
@@ -65,6 +63,8 @@ namespace WeGa
 
             this.Close();
             RequestWindow rw = new RequestWindow();
+            rw.Left = (Utils.getScreenWidth() / 2) - (this.Width / 2);
+            rw.Top = (Utils.getScreenHeight() / 2) - (this.Height / 2);
             rw.Show();
         }
     }

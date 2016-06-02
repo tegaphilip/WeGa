@@ -1,10 +1,18 @@
 ﻿<Window x:Class="WeGa.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="WeGaNew" Height="400" Width="500">
+        Title="WeGa" Height="200" Width="500">
 
     <Grid>
-        <Button Content="Login" Name="btnStart" Margin="110,119,0,213" Click="btnStart_Click" Style="{StaticResource buttonStyle}" Height="Auto"/>
-        <Button Content="Register" Name="btnRegister" Margin="249,119,0,213" Click="btnRegister_Click" Style="{StaticResource buttonStyle}" RenderTransformOrigin="1.35,0.966" Height="Auto"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250"/>
+            <ColumnDefinition Width="250" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Button VerticalAlignment="Bottom" HorizontalAlignment="Center" Grid.Column="0" Grid.Row="0" Content="Login" Name="btnStart" Click="btnStart_Click" Style="{StaticResource buttonStyle}" Height="28" Margin="75,0,70,-42"/>
+        <Button VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1" Grid.Row="0" Content="Register" Name="btnRegister" Click="btnRegister_Click" Style="{StaticResource buttonStyle}" RenderTransformOrigin="1.35,0.966" Height="28" Margin="68,56,77,-42"/>
     </Grid>
 </Window>

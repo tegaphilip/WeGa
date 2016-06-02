@@ -32,6 +32,12 @@ namespace WeGa.GameServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/getPlayersNm", ReplyAction="http://tempuri.org/IGameService/getPlayersNmResponse")]
         System.Threading.Tasks.Task<string[]> getPlayersNmAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/CreateGame", ReplyAction="http://tempuri.org/IGameService/CreateGameResponse")]
+        System.Collections.Generic.Dictionary<string, string> CreateGame(string SenderNickName, string ReceiverNickName, string Letters);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/CreateGame", ReplyAction="http://tempuri.org/IGameService/CreateGameResponse")]
+        System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, string>> CreateGameAsync(string SenderNickName, string ReceiverNickName, string Letters);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -83,6 +89,14 @@ namespace WeGa.GameServiceReference {
         
         public System.Threading.Tasks.Task<string[]> getPlayersNmAsync() {
             return base.Channel.getPlayersNmAsync();
+        }
+        
+        public System.Collections.Generic.Dictionary<string, string> CreateGame(string SenderNickName, string ReceiverNickName, string Letters) {
+            return base.Channel.CreateGame(SenderNickName, ReceiverNickName, Letters);
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, string>> CreateGameAsync(string SenderNickName, string ReceiverNickName, string Letters) {
+            return base.Channel.CreateGameAsync(SenderNickName, ReceiverNickName, Letters);
         }
     }
 }

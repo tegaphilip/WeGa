@@ -5,6 +5,14 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="WegaModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.6" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="game_letters_history">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="game_id" Type="int" Nullable="false" />
+          <Property Name="letters" Type="char" MaxLength="7" Nullable="false" />
+        </EntityType>
         <EntityType Name="game_words_history">
           <Key>
             <PropertyRef Name="gwh_id" />
@@ -45,6 +53,18 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="word" Type="varchar" MaxLength="45" Nullable="false" />
         </EntityType>
+        <Association Name="FK_glh_game_id">
+          <End Role="games" Type="Self.games" Multiplicity="1" />
+          <End Role="game_letters_history" Type="Self.game_letters_history" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="games">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="game_letters_history">
+              <PropertyRef Name="game_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_gms_player1">
           <End Role="players" Type="Self.players" Multiplicity="1" />
           <End Role="games" Type="Self.games" Multiplicity="*" />
@@ -106,10 +126,15 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="WegaModelStoreContainer">
+          <EntitySet Name="game_letters_history" EntityType="Self.game_letters_history" Schema="wega" store:Type="Tables" />
           <EntitySet Name="game_words_history" EntityType="Self.game_words_history" Schema="wega" store:Type="Tables" />
           <EntitySet Name="games" EntityType="Self.games" Schema="wega" store:Type="Tables" />
           <EntitySet Name="players" EntityType="Self.players" Schema="wega" store:Type="Tables" />
           <EntitySet Name="words" EntityType="Self.words" Schema="wega" store:Type="Tables" />
+          <AssociationSet Name="FK_glh_game_id" Association="Self.FK_glh_game_id">
+            <End Role="games" EntitySet="games" />
+            <End Role="game_letters_history" EntitySet="game_letters_history" />
+          </AssociationSet>
           <AssociationSet Name="FK_gms_player1" Association="Self.FK_gms_player1">
             <End Role="players" EntitySet="players" />
             <End Role="games" EntitySet="games" />
@@ -136,6 +161,15 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="WegaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="game_letters_history">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="game_id" Type="Int32" Nullable="false" />
+          <Property Name="letters" Type="String" MaxLength="7" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="game" Relationship="Self.FK_glh_game_id" FromRole="game_letters_history" ToRole="games" />
+        </EntityType>
         <EntityType Name="game_words_history">
           <Key>
             <PropertyRef Name="gwh_id" />
@@ -162,6 +196,7 @@
           <Property Name="date_started" Type="DateTime" Nullable="false" />
           <Property Name="date_ended" Type="DateTime" />
           <Property Name="game_neglected" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="game_letters_history" Relationship="Self.FK_glh_game_id" FromRole="games" ToRole="game_letters_history" />
           <NavigationProperty Name="game_words_history" Relationship="Self.FK_gwh_game_id" FromRole="games" ToRole="game_words_history" />
           <NavigationProperty Name="player" Relationship="Self.FK_gms_player1" FromRole="games" ToRole="players" />
           <NavigationProperty Name="player1" Relationship="Self.FK_gms_player2" FromRole="games" ToRole="players" />
@@ -186,6 +221,18 @@
           <Property Name="word1" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="game_words_history" Relationship="Self.Fk_gwh_word_id" FromRole="words" ToRole="game_words_history" />
         </EntityType>
+        <Association Name="FK_glh_game_id">
+          <End Role="games" Type="Self.game" Multiplicity="1" />
+          <End Role="game_letters_history" Type="Self.game_letters_history" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="games">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="game_letters_history">
+              <PropertyRef Name="game_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_gwh_game_id">
           <End Role="games" Type="Self.game" Multiplicity="1" />
           <End Role="game_words_history" Type="Self.game_words_history" Multiplicity="*" />
@@ -247,10 +294,15 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="WegaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="game_letters_history" EntityType="Self.game_letters_history" />
           <EntitySet Name="game_words_history" EntityType="Self.game_words_history" />
           <EntitySet Name="games" EntityType="Self.game" />
           <EntitySet Name="players" EntityType="Self.player" />
           <EntitySet Name="words" EntityType="Self.word" />
+          <AssociationSet Name="FK_glh_game_id" Association="Self.FK_glh_game_id">
+            <End Role="games" EntitySet="games" />
+            <End Role="game_letters_history" EntitySet="game_letters_history" />
+          </AssociationSet>
           <AssociationSet Name="FK_gwh_game_id" Association="Self.FK_gwh_game_id">
             <End Role="games" EntitySet="games" />
             <End Role="game_words_history" EntitySet="game_words_history" />
@@ -278,6 +330,15 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="WegaModelStoreContainer" CdmEntityContainer="WegaEntities">
+          <EntitySetMapping Name="game_letters_history">
+            <EntityTypeMapping TypeName="WegaModel.game_letters_history">
+              <MappingFragment StoreEntitySet="game_letters_history">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="game_id" ColumnName="game_id" />
+                <ScalarProperty Name="letters" ColumnName="letters" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="game_words_history">
             <EntityTypeMapping TypeName="WegaModel.game_words_history">
               <MappingFragment StoreEntitySet="game_words_history">

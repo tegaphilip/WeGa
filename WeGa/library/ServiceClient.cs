@@ -18,7 +18,7 @@ namespace WeGa.library
         {
             client = new GameServiceClient();
             channelFactory = new ChannelFactory<IGameService>("BasicHttpBinding_IGameService");
-            proxy = channelFactory.CreateChannel(); 
+            proxy = channelFactory.CreateChannel();
         }
 
         /// <summary>
@@ -39,6 +39,13 @@ namespace WeGa.library
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <param name="nickname"></param>
+        /// <returns></returns>
         public bool Register(string username, string password, string nickname)
         {
             try
@@ -51,11 +58,33 @@ namespace WeGa.library
             }
         }
 
-       public List<string> getPlayersNm()
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public List<string> getPlayersNm()
         {
             try
             {
                 return proxy.getPlayersNm().ToList<string>();
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        public Dictionary<String, String> CreateGame(string senderNickName, string receiverNickName, string letters)
+        {
+            try
+            {
+                return proxy.CreateGame(senderNickName, receiverNickName, letters);
             }
             catch
             {

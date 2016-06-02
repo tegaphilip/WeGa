@@ -19,5 +19,8 @@ namespace WeGaService
 
         [OperationContract]
         List<string> getPlayersNm();
+
+        [OperationContract]
+        Dictionary<String, String> CreateGame(string SenderNickName, string ReceiverNickName, string Letters);
     }
 }

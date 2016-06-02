@@ -25,6 +25,7 @@ namespace WeGaService
             throw new UnintentionalCodeFirstException();
         }
     
+        public DbSet<game_letters_history> game_letters_history { get; set; }
         public DbSet<game_words_history> game_words_history { get; set; }
         public DbSet<game> games { get; set; }
         public DbSet<player> players { get; set; }
