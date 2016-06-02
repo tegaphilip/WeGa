@@ -44,9 +44,6 @@ namespace WeGa
                 return;
             }
 
-
-            MessageBox.Show(un.ToString());
-
             ServiceClient sc = new ServiceClient();
             Dictionary<String, String> login = sc.Login(un, pass);
             if (login["status"] == Constants.ERROR)
@@ -56,6 +53,14 @@ namespace WeGa
             else
             {
                 message.Content = "Welcome boss!!!!!!! >> " + login["nickname"];
+            }
+
+            Application.Current.Resources["username"] = un;
+            List<string> nickNameList = sc.getPlayersNm();
+            foreach (string nm in nickNameList)
+            {
+                if (nm == un)
+                    Application.Current.Resources["nickname"] = nm;
             }
 
             this.Close();

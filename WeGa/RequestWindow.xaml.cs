@@ -21,6 +21,7 @@ namespace WeGa
     public partial class RequestWindow : Window
     {
         ServiceClient sc;
+        List<string> nickNameList;
 
         public RequestWindow()
         {
@@ -31,8 +32,10 @@ namespace WeGa
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            Application.Current.Resources["gameLetters"] = Utils.getLetters();
             //send game request
             //string = "INSERT INTO games Values()";--create a game
+
             this.Close();
             Window gb = new GameBoard();
             gb.Show();
@@ -41,8 +44,20 @@ namespace WeGa
 
         private void setPlayerList()
         {
-            List<string> pl = sc.getPlayersNm();
-            
+            nickNameList = sc.getPlayersNm();
+            nickNameList.Remove((string)Application.Current.Resources["nickname"]);
+            foreach (string nm in nickNameList)
+            {
+                ListBoxItem item = new ListBoxItem();
+                item.Content = nm;
+                playerList.Items.Add(item);
+            }
         }
+
+        private void ListBoxItem_Selected(object sender, RoutedEventArgs e)
+        {
+
+        }
+
     }
 }

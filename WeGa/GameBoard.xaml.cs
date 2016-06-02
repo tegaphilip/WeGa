@@ -24,7 +24,7 @@ namespace WeGa
         public GameBoard()
         {
             InitializeComponent();
-            letters = Utils.getLetters();
+            letters = (string)Application.Current.Resources["gameLetters"];
             setLettersPanel();
         }
 

@@ -51,8 +51,7 @@ namespace WeGa
                 bool res = sc.Register(username.Text.Trim(), password.Password.Trim(), nickname.Text.Trim());
 
                 MessageBoxButton mbb = new MessageBoxButton();
-                MessageBox.Show(this, res.ToString(), "You've registered sucessfully~\n"+"Click OK", mbb);
-
+                MessageBox.Show(this, res.ToString(), "You've registered sucessfully!~\n"+"Click OK to login!~", mbb);
                 this.Close();
 
             }
