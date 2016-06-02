@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity.Validation;
+using System.Data.EntityClient;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
 using WeGaService.libraries;
 
 namespace WeGaService.models
@@ -135,6 +138,64 @@ namespace WeGaService.models
         public static string getLatestErrorMessage()
         {
             return ErrorMessage;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="nickname"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        public Boolean CreateGame(string SenderNickName, string ReceiverNickName, string Letters)
+        {
+            if (Letters.Distinct().Count() != 7)
+            {
+                setErrorMessage("The letters must be 7 unique distinct characters");
+                return false;
+            }
+
+            //todo use a transaction
+            try
+            {
+                using (WegaEntities db = new WegaEntities())
+                {
+                    var player1 = db.players.FirstOrDefault(p => p.nickname == SenderNickName);
+                    var player2 = db.players.FirstOrDefault(p => p.nickname == ReceiverNickName);
+
+                    if (player1 == null || player2 == null)
+                    {
+                        setErrorMessage("Could not retreve players");
+                        return false;
+                    }
+
+                    game g = new game
+                    {
+                        player1_id = player1.id,
+                        player2_id = player2.id,
+                        date_started = DateTime.Now
+                    };
+
+                    db.games.Add(g);
+                    db.SaveChanges();
+
+                    game_letters_history glh = new game_letters_history
+                    {
+                        letters = Letters,
+                        game_id = g.id
+                    };
+                    // Add the new object to the players collection.
+                    db.game_letters_history.Add(glh);
+                    // Submit the change to the database.
+                    db.SaveChanges();
+                    return true;
+                }
+            }
+            catch (DbEntityValidationException dbEx)
+            {
+                setErrorMessage(dbEx);
+                return false;
+            }
         }
     }
 }

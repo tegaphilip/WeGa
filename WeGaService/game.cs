@@ -16,6 +16,7 @@ namespace WeGaService
     {
         public game()
         {
+            this.game_letters_history = new HashSet<game_letters_history>();
             this.game_words_history = new HashSet<game_words_history>();
         }
     
@@ -29,6 +30,7 @@ namespace WeGaService
         public Nullable<System.DateTime> date_ended { get; set; }
         public bool game_neglected { get; set; }
     
+        public virtual ICollection<game_letters_history> game_letters_history { get; set; }
         public virtual ICollection<game_words_history> game_words_history { get; set; }
         public virtual player player { get; set; }
         public virtual player player1 { get; set; }

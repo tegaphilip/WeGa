@@ -49,6 +49,7 @@
     <Reference Include="System.Security" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.ServiceModel.Web" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
@@ -70,6 +71,9 @@
       <DependentUpon>Database.edmx</DependentUpon>
     </Compile>
     <Compile Include="game.cs">
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="game_letters_history.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
     <Compile Include="game_words_history.cs">
