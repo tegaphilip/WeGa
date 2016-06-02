@@ -22,6 +22,8 @@ namespace WeGa
     {
         ServiceClient sc;
         List<string> nickNameList;
+        String receivedNickName;
+        String gameLetters;
 
         public RequestWindow()
         {
@@ -32,10 +34,10 @@ namespace WeGa
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Application.Current.Resources["gameLetters"] = Utils.getLetters();
-            //send game request
-            //string = "INSERT INTO games Values()";--create a game
-            
+            gameLetters = Utils.getLetters();
+            Application.Current.Resources["gameLetters"] = gameLetters;
+            sc.CreateGame((String)Application.Current.Resources["nickname"], receivedNickName, gameLetters);
+
             this.Close();
             Window gb = new GameBoard();
             gb.Show();
@@ -50,6 +52,7 @@ namespace WeGa
             {
                 ListBoxItem item = new ListBoxItem();
                 item.Content = nm;
+                
                 playerList.Items.Add(item);
             }
         }
