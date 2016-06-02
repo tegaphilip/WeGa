@@ -48,10 +48,10 @@ namespace WeGa
             else
             {
                 ServiceClient sc = new ServiceClient();
-                bool res = sc.Register(username.Text, password.Password, nickname.Text);
+                bool res = sc.Register(username.Text.Trim(), password.Password.Trim(), nickname.Text.Trim());
 
                 MessageBoxButton mbb = new MessageBoxButton();
-                MessageBox.Show(this, res.ToString(), "title", mbb);
+                MessageBox.Show(this, res.ToString(), "You've registered sucessfully~\n"+"Click OK", mbb);
 
                 this.Close();
 

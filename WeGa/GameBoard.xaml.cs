@@ -31,10 +31,11 @@ namespace WeGa
 
         //Get the letter by the letter_button's content, set to content of the first empty word_button 
         private void btn_Letter_Click(object sender, RoutedEventArgs e)
-        {         
-            Button btn_clicked = (Button) sender;
-            if (btn_clicked.Content.ToString() != "") { 
-                char letter =  char.Parse(btn_clicked.Content.ToString());
+        {
+            Button btn_clicked = (Button)sender;
+            if (btn_clicked.Content.ToString() != "")
+            {
+                char letter = char.Parse(btn_clicked.Content.ToString());
                 btn_clicked.Content = "";
                 //set letter to word_button
                 var list = this.wordPanel.Children;
@@ -52,7 +53,7 @@ namespace WeGa
         //Clear content of btn clicked and set the value back to letters panel
         private void btn_word_Click(object sender, RoutedEventArgs e)
         {
-            Button btn_clicked = (Button) sender;
+            Button btn_clicked = (Button)sender;
             if (btn_clicked.Content.ToString() != "")
             {
                 btn_clicked.Content = "";
@@ -66,11 +67,11 @@ namespace WeGa
         {
             message.Content = "";
             //Check if is empty and 
-            if (!isEmpty() && !isSingleLetter() && !isPlayed(getNewWord())){
-
-                        message.Content += "The new WORD is " + getNewWord() + "\n";
-                        setWord();
-                        setLettersPanel();
+            if (!isEmpty() && !isSingleLetter() && !isPlayed(getNewWord()))
+            {
+                message.Content += "The new WORD is " + getNewWord() + "\n";
+                setWord();
+                setLettersPanel();
             }
         }
 
@@ -95,7 +96,7 @@ namespace WeGa
         //Check if the word to be added is empty.
         private bool isEmpty()
         {
-            Button element = wordPanel.Children.Cast<Button>().FirstOrDefault(e => Grid.GetColumn(e) == 0 && Grid.GetRow(e) == 0);    
+            Button element = wordPanel.Children.Cast<Button>().FirstOrDefault(e => Grid.GetColumn(e) == 0 && Grid.GetRow(e) == 0);
             //Need to be deleted at the end.
             if (element.Content.Equals("") || element == null)
             {
@@ -109,7 +110,8 @@ namespace WeGa
         private bool isSingleLetter()
         {
             Button element = wordPanel.Children.Cast<Button>().FirstOrDefault(e => Grid.GetColumn(e) == 1 && Grid.GetRow(e) == 0);
-            if (!isEmpty()) {
+            if (!isEmpty())
+            {
                 if (element.Content.Equals("") || element == null)
                 {
                     message.Content += "From btnAdd_Click: A single letter dosent count!\n";
@@ -117,14 +119,14 @@ namespace WeGa
                 }
                 else
                     return false;
-            }        
+            }
             return false;
         }
 
         //Concatenate the letters to a word.
         private string getNewWord()
         {
-            string newWord ="";
+            string newWord = "";
             var list = this.wordPanel.Children;
             foreach (Button btn in list)
             {
@@ -147,7 +149,7 @@ namespace WeGa
                     message.Content += "You have added this word!";
                     return true;
                 }
-            } 
+            }
             return false;
         }
 
