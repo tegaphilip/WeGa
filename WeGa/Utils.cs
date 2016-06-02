@@ -28,7 +28,7 @@ namespace WeGa
             string letters = "";
             do
             {
-                c = vowelSet[rnd.Next(0, 3)];
+                c = vowelSet[rnd.Next(0, 5)];
                 if (!letters.Contains(c))
                     letters += c;
             } while (letters.Length < 3);

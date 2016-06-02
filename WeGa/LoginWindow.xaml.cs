@@ -44,14 +44,9 @@ namespace WeGa
                 return;
             }
 
-<<<<<<< HEAD
-            MessageBox.Show(login.ToString());
-            
-            this.Close();
-            RequestWindow rw = new RequestWindow();
-            rw.Show();
-      
-=======
+
+            MessageBox.Show(un.ToString());
+
             ServiceClient sc = new ServiceClient();
             Dictionary<String, String> login = sc.Login(un, pass);
             if (login["status"] == Constants.ERROR)
@@ -62,7 +57,10 @@ namespace WeGa
             {
                 message.Content = "Welcome boss!!!!!!! >> " + login["nickname"];
             }
->>>>>>> 37c928788076ee788202bf4fc71d081314249bd5
+
+            this.Close();
+            RequestWindow rw = new RequestWindow();
+            rw.Show();
         }
     }
 }

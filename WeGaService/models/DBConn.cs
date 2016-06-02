@@ -115,7 +115,6 @@ namespace WeGaService.models
             }
         }
 
-<<<<<<< HEAD
         public List<string> getPlayersNm()
         {
             using (WegaEntities db = new WegaEntities())
@@ -128,7 +127,7 @@ namespace WeGaService.models
                 }
                 return pname;
             }
-=======
+        }
         /// <summary>
         /// 
         /// </summary>
@@ -136,7 +135,6 @@ namespace WeGaService.models
         public static string getLatestErrorMessage()
         {
             return ErrorMessage;
->>>>>>> 37c928788076ee788202bf4fc71d081314249bd5
         }
     }
 }

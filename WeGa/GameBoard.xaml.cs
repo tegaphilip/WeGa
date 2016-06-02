@@ -66,17 +66,11 @@ namespace WeGa
         {
             message.Content = "";
             //Check if is empty and 
-            if (!isEmpty()){
-                if (!isSingleLetter())
-                {
-                    if (!isPlayed(getNewWord())) 
-                    { 
+            if (!isEmpty() && !isSingleLetter() && !isPlayed(getNewWord())){
+
                         message.Content += "The new WORD is " + getNewWord() + "\n";
                         setWord();
                         setLettersPanel();
-                    }
-
-                }
             }
         }
 

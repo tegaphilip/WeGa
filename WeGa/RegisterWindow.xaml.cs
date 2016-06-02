@@ -53,6 +53,8 @@ namespace WeGa
                 MessageBoxButton mbb = new MessageBoxButton();
                 MessageBox.Show(this, res.ToString(), "title", mbb);
 
+                this.Close();
+
             }
 
         }

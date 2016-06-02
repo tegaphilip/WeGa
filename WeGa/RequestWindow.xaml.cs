@@ -33,7 +33,10 @@ namespace WeGa
         {
             //send game request
             //string = "INSERT INTO games Values()";--create a game
-            Window gameBorad = new GameBoard();
+            this.Close();
+            Window gb = new GameBoard();
+            gb.Show();
+
         }
 
         private void setPlayerList()
