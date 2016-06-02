@@ -10,13 +10,13 @@ namespace WeGa.library
 {
     class ServiceClient
     {
-        //private GameServiceClient client;
+        private GameServiceClient client;
         private IGameService proxy;
         private ChannelFactory<IGameService> channelFactory;
 
         public ServiceClient()
         {
-            //client = new GameServiceClient();
+            client = new GameServiceClient();
             channelFactory = new ChannelFactory<IGameService>("BasicHttpBinding_IGameService");
             proxy = channelFactory.CreateChannel(); 
         }
@@ -48,6 +48,18 @@ namespace WeGa.library
             catch
             {
                 return false;
+            }
+        }
+
+       public List<string> getPlayersNm()
+        {
+            try
+            {
+                return proxy.getPlayersNm().ToList<string>();
+            }
+            catch
+            {
+                return null;
             }
         }
     }

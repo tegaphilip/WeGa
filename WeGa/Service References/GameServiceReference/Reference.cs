@@ -26,6 +26,12 @@ namespace WeGa.GameServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/RegisterPlayer", ReplyAction="http://tempuri.org/IGameService/RegisterPlayerResponse")]
         System.Threading.Tasks.Task<bool> RegisterPlayerAsync(string username, string nickname, string password);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/getPlayersNm", ReplyAction="http://tempuri.org/IGameService/getPlayersNmResponse")]
+        string[] getPlayersNm();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/getPlayersNm", ReplyAction="http://tempuri.org/IGameService/getPlayersNmResponse")]
+        System.Threading.Tasks.Task<string[]> getPlayersNmAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -69,6 +75,14 @@ namespace WeGa.GameServiceReference {
         
         public System.Threading.Tasks.Task<bool> RegisterPlayerAsync(string username, string nickname, string password) {
             return base.Channel.RegisterPlayerAsync(username, nickname, password);
+        }
+        
+        public string[] getPlayersNm() {
+            return base.Channel.getPlayersNm();
+        }
+        
+        public System.Threading.Tasks.Task<string[]> getPlayersNmAsync() {
+            return base.Channel.getPlayersNmAsync();
         }
     }
 }

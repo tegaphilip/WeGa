@@ -59,5 +59,7 @@ namespace WeGa
             registerWindow.Top = (Utils.getScreenHeight() / 2) - (registerWindow.Height / 2);
             registerWindow.ShowDialog();
         }
+
+
     }
 }

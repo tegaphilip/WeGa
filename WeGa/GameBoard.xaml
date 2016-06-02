@@ -1,0 +1,79 @@
+﻿<Window x:Class="WeGa.GameBoard"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="GameBoard" Height="400" Width="550">
+
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Left" Height="Auto" Margin="5" VerticalAlignment="Center">
+            <Button Content="Letters"/>
+            <Grid Name="lettersPanel" Height="Auto" Width="Auto">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="30" />
+                </Grid.RowDefinitions>
+                <Button Grid.Row="0"  Click="btn_Letter_Click" />
+                <Button Grid.Row="1"  Click="btn_Letter_Click" />
+                <Button Grid.Row="2"  Click="btn_Letter_Click" />
+                <Button Grid.Row="3"  Click="btn_Letter_Click" />
+                <Button Grid.Row="4"  Click="btn_Letter_Click" />
+                <Button Grid.Row="5"  Click="btn_Letter_Click" />
+                <Button Grid.Row="6"  Click="btn_Letter_Click" />
+            </Grid>
+        </StackPanel>
+
+
+        <Grid Name="wordList" DockPanel.Dock="Right" Margin="10" ShowGridLines="True" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+            </Grid.RowDefinitions>
+            <Button Content="Timer" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Grid>
+
+        <Grid DockPanel.Dock="Top" Margin="5" Height="60">
+            <Button Content="dock top"/>
+        </Grid>
+
+        <Grid DockPanel.Dock="Bottom" Margin="10">
+            <Button Content="bottom"/>
+        </Grid>
+
+        <Label Content="Message:" DockPanel.Dock="Top" Name="message"/>
+        <Grid Name="wordPanel" ShowGridLines="True" DockPanel.Dock="Top" Margin="0,70,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="0" Content=""  Click="btn_word_Click"/>
+            <Button Grid.Column="1" Content=""  Click="btn_word_Click"/>
+            <Button Grid.Column="2" Content=""  Click="btn_word_Click"/>
+            <Button Grid.Column="3" Content=""  Click="btn_word_Click"/>
+            <Button Grid.Column="4" Content=""  Click="btn_word_Click"/>
+            <Button Grid.Column="5" Content=""  Click="btn_word_Click"/>
+            <Button Grid.Column="6" Content=""  Click="btn_word_Click"/>
+            <Button Grid.Column="7" Content=""  Click="btn_word_Click"/>         
+        </Grid>
+        <Button Content="btnReset" Click="btnReset_Click" Width="70" Height="30"  />
+        <Button Content="btnAdd" Click="btnAdd_Click" Width="70" Height="30" />
+        <Button Content="btnResine" Width="70" Height="30" />
+    </DockPanel>
+</Window>
