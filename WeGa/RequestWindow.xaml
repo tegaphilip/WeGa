@@ -15,5 +15,6 @@
             <ListBoxItem Selected="ListBoxItem_Selected"></ListBoxItem>
         </ListBox>
         <Button Grid.Row= "1" x:Name="btn"  Content="Send Request" HorizontalAlignment="Left" VerticalAlignment="Top"  Click="Button_Click"  Style="{StaticResource buttonStyle}" Margin="10,8,0,0" Grid.Column="1"/>
+        <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="10,86,0,0" VerticalAlignment="Top" Text="{DynamicResource username}" />
     </Grid>
 </Window>

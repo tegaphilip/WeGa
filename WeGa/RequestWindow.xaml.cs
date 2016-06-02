@@ -35,7 +35,7 @@ namespace WeGa
             Application.Current.Resources["gameLetters"] = Utils.getLetters();
             //send game request
             //string = "INSERT INTO games Values()";--create a game
-
+            
             this.Close();
             Window gb = new GameBoard();
             gb.Show();
