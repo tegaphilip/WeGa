@@ -38,6 +38,12 @@ namespace WeGa.GameServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/CreateGame", ReplyAction="http://tempuri.org/IGameService/CreateGameResponse")]
         System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, string>> CreateGameAsync(string SenderNickName, string ReceiverNickName, string Letters);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/SendWord", ReplyAction="http://tempuri.org/IGameService/SendWordResponse")]
+        System.Collections.Generic.Dictionary<string, string> SendWord(string wordPlayed, int gameId, string nickname);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/SendWord", ReplyAction="http://tempuri.org/IGameService/SendWordResponse")]
+        System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, string>> SendWordAsync(string wordPlayed, int gameId, string nickname);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -97,6 +103,14 @@ namespace WeGa.GameServiceReference {
         
         public System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, string>> CreateGameAsync(string SenderNickName, string ReceiverNickName, string Letters) {
             return base.Channel.CreateGameAsync(SenderNickName, ReceiverNickName, Letters);
+        }
+        
+        public System.Collections.Generic.Dictionary<string, string> SendWord(string wordPlayed, int gameId, string nickname) {
+            return base.Channel.SendWord(wordPlayed, gameId, nickname);
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, string>> SendWordAsync(string wordPlayed, int gameId, string nickname) {
+            return base.Channel.SendWordAsync(wordPlayed, gameId, nickname);
         }
     }
 }

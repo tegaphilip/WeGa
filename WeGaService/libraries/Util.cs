@@ -8,6 +8,11 @@ namespace WeGaService.libraries
 {
     class Util
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="pass"></param>
+        /// <returns></returns>
         public static string EncryptPassword(string pass)
         {
             SHA256Managed crypt = new SHA256Managed();
@@ -22,9 +27,31 @@ namespace WeGaService.libraries
             //return pass;
         }
 
-        public static bool veriFyPassword(string password, string dbPass)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="password"></param>
+        /// <param name="dbPass"></param>
+        /// <returns></returns>
+        public static bool VeriFyPassword(string password, string dbPass)
         {
             return EncryptPassword(password) == dbPass;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="word"></param>
+        /// <returns></returns>
+        public static int ComputeScore(String word)
+        {
+            int score = word.Length * 10;
+            if (word.Length == 7)
+            {
+                score += 70;
+            }
+
+            return score;
         }
     }
 }

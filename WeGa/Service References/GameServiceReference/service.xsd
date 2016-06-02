@@ -60,4 +60,20 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="SendWord">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="wordPlayed" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="gameId" type="xs:int" />
+        <xs:element minOccurs="0" name="nickname" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SendWordResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="SendWordResult" nillable="true" type="q4:ArrayOfKeyValueOfstringstring" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

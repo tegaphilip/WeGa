@@ -91,5 +91,24 @@ namespace WeGa.library
                 return null;
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="wordPlayed"></param>
+        /// <param name="gameId"></param>
+        /// <param name="nickname"></param>
+        /// <returns></returns>
+        public Dictionary<string, string> SendWord(string wordPlayed, int gameId, string nickname)
+        {
+            try
+            {
+                return proxy.SendWord(wordPlayed, gameId, nickname);
+            }
+            catch
+            {
+                return null;
+            }
+        }
     }
 }

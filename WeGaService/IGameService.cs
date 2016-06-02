@@ -22,5 +22,8 @@ namespace WeGaService
 
         [OperationContract]
         Dictionary<String, String> CreateGame(string SenderNickName, string ReceiverNickName, string Letters);
+
+        [OperationContract]
+        Dictionary<String, String> SendWord(String wordPlayed, int gameId, string nickname);
     }
 }
