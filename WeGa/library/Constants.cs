@@ -10,5 +10,7 @@ namespace WeGa.library
     {
         public const string ERROR = "error";
         public const string SUCCESS = "success";
+        public const string TYPE_LEADERBOARD_AVERAGE_SCORE = "a";
+        public const string TYPE_LEADERBOARD_TOTAL_SCORE = "t";
     }
 }

@@ -19,11 +19,11 @@
   <wsdl:message name="IGameService_RegisterPlayer_OutputMessage">
     <wsdl:part name="parameters" element="tns:RegisterPlayerResponse" />
   </wsdl:message>
-  <wsdl:message name="IGameService_getPlayersNm_InputMessage">
-    <wsdl:part name="parameters" element="tns:getPlayersNm" />
+  <wsdl:message name="IGameService_GetPlayerNicknames_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPlayerNicknames" />
   </wsdl:message>
-  <wsdl:message name="IGameService_getPlayersNm_OutputMessage">
-    <wsdl:part name="parameters" element="tns:getPlayersNmResponse" />
+  <wsdl:message name="IGameService_GetPlayerNicknames_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPlayerNicknamesResponse" />
   </wsdl:message>
   <wsdl:message name="IGameService_CreateGame_InputMessage">
     <wsdl:part name="parameters" element="tns:CreateGame" />
@@ -37,6 +37,42 @@
   <wsdl:message name="IGameService_SendWord_OutputMessage">
     <wsdl:part name="parameters" element="tns:SendWordResponse" />
   </wsdl:message>
+  <wsdl:message name="IGameService_GetGameRequests_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetGameRequests" />
+  </wsdl:message>
+  <wsdl:message name="IGameService_GetGameRequests_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetGameRequestsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IGameService_GetGameWordsHistory_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetGameWordsHistory" />
+  </wsdl:message>
+  <wsdl:message name="IGameService_GetGameWordsHistory_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetGameWordsHistoryResponse" />
+  </wsdl:message>
+  <wsdl:message name="IGameService_EndGame_InputMessage">
+    <wsdl:part name="parameters" element="tns:EndGame" />
+  </wsdl:message>
+  <wsdl:message name="IGameService_EndGame_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EndGameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IGameService_NeglectGame_InputMessage">
+    <wsdl:part name="parameters" element="tns:NeglectGame" />
+  </wsdl:message>
+  <wsdl:message name="IGameService_NeglectGame_OutputMessage">
+    <wsdl:part name="parameters" element="tns:NeglectGameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IGameService_ResignGame_InputMessage">
+    <wsdl:part name="parameters" element="tns:ResignGame" />
+  </wsdl:message>
+  <wsdl:message name="IGameService_ResignGame_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ResignGameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IGameService_GetLeaderBoard_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetLeaderBoard" />
+  </wsdl:message>
+  <wsdl:message name="IGameService_GetLeaderBoard_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetLeaderBoardResponse" />
+  </wsdl:message>
   <wsdl:portType name="IGameService">
     <wsdl:operation name="Login">
       <wsdl:input wsaw:Action="http://tempuri.org/IGameService/Login" message="tns:IGameService_Login_InputMessage" />
@@ -46,9 +82,9 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IGameService/RegisterPlayer" message="tns:IGameService_RegisterPlayer_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IGameService/RegisterPlayerResponse" message="tns:IGameService_RegisterPlayer_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="getPlayersNm">
-      <wsdl:input wsaw:Action="http://tempuri.org/IGameService/getPlayersNm" message="tns:IGameService_getPlayersNm_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IGameService/getPlayersNmResponse" message="tns:IGameService_getPlayersNm_OutputMessage" />
+    <wsdl:operation name="GetPlayerNicknames">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGameService/GetPlayerNicknames" message="tns:IGameService_GetPlayerNicknames_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGameService/GetPlayerNicknamesResponse" message="tns:IGameService_GetPlayerNicknames_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="CreateGame">
       <wsdl:input wsaw:Action="http://tempuri.org/IGameService/CreateGame" message="tns:IGameService_CreateGame_InputMessage" />
@@ -57,6 +93,30 @@
     <wsdl:operation name="SendWord">
       <wsdl:input wsaw:Action="http://tempuri.org/IGameService/SendWord" message="tns:IGameService_SendWord_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IGameService/SendWordResponse" message="tns:IGameService_SendWord_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetGameRequests">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGameService/GetGameRequests" message="tns:IGameService_GetGameRequests_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGameService/GetGameRequestsResponse" message="tns:IGameService_GetGameRequests_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetGameWordsHistory">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGameService/GetGameWordsHistory" message="tns:IGameService_GetGameWordsHistory_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGameService/GetGameWordsHistoryResponse" message="tns:IGameService_GetGameWordsHistory_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EndGame">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGameService/EndGame" message="tns:IGameService_EndGame_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGameService/EndGameResponse" message="tns:IGameService_EndGame_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="NeglectGame">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGameService/NeglectGame" message="tns:IGameService_NeglectGame_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGameService/NeglectGameResponse" message="tns:IGameService_NeglectGame_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ResignGame">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGameService/ResignGame" message="tns:IGameService_ResignGame_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGameService/ResignGameResponse" message="tns:IGameService_ResignGame_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLeaderBoard">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGameService/GetLeaderBoard" message="tns:IGameService_GetLeaderBoard_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGameService/GetLeaderBoardResponse" message="tns:IGameService_GetLeaderBoard_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IGameService" type="tns:IGameService">
@@ -79,8 +139,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="getPlayersNm">
-      <soap:operation soapAction="http://tempuri.org/IGameService/getPlayersNm" style="document" />
+    <wsdl:operation name="GetPlayerNicknames">
+      <soap:operation soapAction="http://tempuri.org/IGameService/GetPlayerNicknames" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -99,6 +159,60 @@
     </wsdl:operation>
     <wsdl:operation name="SendWord">
       <soap:operation soapAction="http://tempuri.org/IGameService/SendWord" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGameRequests">
+      <soap:operation soapAction="http://tempuri.org/IGameService/GetGameRequests" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGameWordsHistory">
+      <soap:operation soapAction="http://tempuri.org/IGameService/GetGameWordsHistory" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EndGame">
+      <soap:operation soapAction="http://tempuri.org/IGameService/EndGame" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NeglectGame">
+      <soap:operation soapAction="http://tempuri.org/IGameService/NeglectGame" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ResignGame">
+      <soap:operation soapAction="http://tempuri.org/IGameService/ResignGame" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLeaderBoard">
+      <soap:operation soapAction="http://tempuri.org/IGameService/GetLeaderBoard" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

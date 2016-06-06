@@ -29,6 +29,11 @@ namespace WeGaService
         public System.DateTime date_started { get; set; }
         public Nullable<System.DateTime> date_ended { get; set; }
         public bool game_neglected { get; set; }
+        public Nullable<bool> player1_ended { get; set; }
+        public Nullable<System.DateTime> player1_end_time { get; set; }
+        public Nullable<bool> player2_ended { get; set; }
+        public Nullable<System.DateTime> player2_end_time { get; set; }
+        public Nullable<int> game_time { get; set; }
     
         public virtual ICollection<game_letters_history> game_letters_history { get; set; }
         public virtual ICollection<game_words_history> game_words_history { get; set; }

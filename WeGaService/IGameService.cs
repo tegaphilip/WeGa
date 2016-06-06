@@ -18,12 +18,30 @@ namespace WeGaService
         bool RegisterPlayer(string username, string nickname, string password);
 
         [OperationContract]
-        List<string> getPlayersNm();
+        List<string> GetPlayerNicknames();
 
         [OperationContract]
         Dictionary<String, String> CreateGame(string SenderNickName, string ReceiverNickName, string Letters);
 
         [OperationContract]
         Dictionary<String, String> SendWord(String wordPlayed, int gameId, string nickname);
+
+        [OperationContract]
+        List<Dictionary<String, String>> GetGameRequests(String nickname);
+
+        [OperationContract]
+        List<Dictionary<String, String>> GetGameWordsHistory(int gameId, String nickname);
+
+        [OperationContract]
+        Dictionary<String, String> EndGame(int gameId, string nickname);
+
+        [OperationContract]
+        Dictionary<String, String> NeglectGame(int gameId, string nickname);
+
+        [OperationContract]
+        Dictionary<String, String> ResignGame(int gameId, string nickname);
+
+        [OperationContract]
+        Dictionary<String, double> GetLeaderBoard(string type);
     }
 }

@@ -57,9 +57,9 @@ namespace WeGaService
         /// 
         /// </summary>
         /// <returns></returns>
-        public List<string> getPlayersNm()
+        public List<string> GetPlayerNicknames()
         {
-            return new DBConn().getPlayersNm();
+            return new DBConn().GetPlayerNicknames();
         }
 
         /// <summary>
@@ -107,6 +107,106 @@ namespace WeGaService
                 response["status"] = SUCCESS;
             }
             return response;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="nickname"></param>
+        /// <returns></returns>
+        public List<Dictionary<String, String>> GetGameRequests(string nickname)
+        {
+            return new DBConn().GetGameRequests(nickname);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="gameId"></param>
+        /// <param name="nickname"></param>
+        /// <returns></returns>
+        public List<Dictionary<string, string>> GetGameWordsHistory(int gameId, string nickname)
+        {
+            return new DBConn().GetGameWordsHistory(gameId, nickname);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="gameId"></param>
+        /// <param name="nickname"></param>
+        /// <returns></returns>
+        public Dictionary<string, string> EndGame(int gameId, string nickname)
+        {
+            Dictionary<String, String> response = new Dictionary<string, string>();
+            response["status"] = ERROR;
+
+            String score = new DBConn().EndGame(gameId, nickname).ToString();
+            if (score == "False")
+            {
+                response["message"] = DBConn.getLatestErrorMessage();
+            }
+            else
+            {
+                response["status"] = SUCCESS;
+            }
+            return response;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="gameId"></param>
+        /// <param name="nickname"></param>
+        /// <returns></returns>
+        public Dictionary<string, string> NeglectGame(int gameId, string nickname)
+        {
+            Dictionary<String, String> response = new Dictionary<string, string>();
+            response["status"] = ERROR;
+
+            String score = new DBConn().NeglectGame(gameId, nickname).ToString();
+            if (score == "False")
+            {
+                response["message"] = DBConn.getLatestErrorMessage();
+            }
+            else
+            {
+                response["status"] = SUCCESS;
+            }
+            return response;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="gameId"></param>
+        /// <param name="nickname"></param>
+        /// <returns></returns>
+        public Dictionary<string, string> ResignGame(int gameId, string nickname)
+        {
+            Dictionary<String, String> response = new Dictionary<string, string>();
+            response["status"] = ERROR;
+
+            String score = new DBConn().ResignGame(gameId, nickname).ToString();
+            if (score == "False")
+            {
+                response["message"] = DBConn.getLatestErrorMessage();
+            }
+            else
+            {
+                response["status"] = SUCCESS;
+            }
+            return response;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        public Dictionary<string, double> GetLeaderBoard(string type)
+        {
+            return new DBConn().GetLeaderBoard(type);
         }
     }
 }
