@@ -36,6 +36,11 @@
           <Property Name="date_started" Type="datetime" Precision="0" Nullable="false" />
           <Property Name="date_ended" Type="datetime" Precision="0" />
           <Property Name="game_neglected" Type="bool" Nullable="false" />
+          <Property Name="player1_ended" Type="bool" />
+          <Property Name="player1_end_time" Type="datetime" Precision="0" />
+          <Property Name="player2_ended" Type="bool" />
+          <Property Name="player2_end_time" Type="datetime" Precision="0" />
+          <Property Name="game_time" Type="int" />
         </EntityType>
         <EntityType Name="players">
           <Key>
@@ -196,6 +201,11 @@
           <Property Name="date_started" Type="DateTime" Nullable="false" />
           <Property Name="date_ended" Type="DateTime" />
           <Property Name="game_neglected" Type="Boolean" Nullable="false" />
+          <Property Name="player1_ended" Type="Boolean" />
+          <Property Name="player1_end_time" Type="DateTime" />
+          <Property Name="player2_ended" Type="Boolean" />
+          <Property Name="player2_end_time" Type="DateTime" />
+          <Property Name="game_time" Type="Int32" />
           <NavigationProperty Name="game_letters_history" Relationship="Self.FK_glh_game_id" FromRole="games" ToRole="game_letters_history" />
           <NavigationProperty Name="game_words_history" Relationship="Self.FK_gwh_game_id" FromRole="games" ToRole="game_words_history" />
           <NavigationProperty Name="player" Relationship="Self.FK_gms_player1" FromRole="games" ToRole="players" />
@@ -362,6 +372,11 @@
                 <ScalarProperty Name="date_started" ColumnName="date_started" />
                 <ScalarProperty Name="date_ended" ColumnName="date_ended" />
                 <ScalarProperty Name="game_neglected" ColumnName="game_neglected" />
+                <ScalarProperty Name="player1_ended" ColumnName="player1_ended" />
+                <ScalarProperty Name="player1_end_time" ColumnName="player1_end_time" />
+                <ScalarProperty Name="player2_ended" ColumnName="player2_ended" />
+                <ScalarProperty Name="player2_end_time" ColumnName="player2_end_time" />
+                <ScalarProperty Name="game_time" ColumnName="game_time" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

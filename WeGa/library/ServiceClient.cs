@@ -62,11 +62,11 @@ namespace WeGa.library
         /// 
         /// </summary>
         /// <returns></returns>
-        public List<string> getPlayersNm()
+        public List<string> GetPlayerNicknames()
         {
             try
             {
-                return proxy.getPlayersNm().ToList<string>();
+                return proxy.GetPlayerNicknames().ToList<string>();
             }
             catch
             {
@@ -85,6 +85,131 @@ namespace WeGa.library
             try
             {
                 return proxy.CreateGame(senderNickName, receiverNickName, letters);
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="wordPlayed"></param>
+        /// <param name="gameId"></param>
+        /// <param name="nickname"></param>
+        /// <returns></returns>
+        public Dictionary<string, string> SendWord(string wordPlayed, int gameId, string nickname)
+        {
+            try
+            {
+                return proxy.SendWord(wordPlayed, gameId, nickname);
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="nickname"></param>
+        /// <returns></returns>
+        public Dictionary<string, string>[] GetGameRequests(string nickname)
+        {
+            try
+            {
+                return proxy.GetGameRequests(nickname);
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="gameId"></param>
+        /// <param name="nickname"></param>
+        /// <returns></returns>
+        public Dictionary<string, string>[] GetGameWordsHistory(int gameId, string nickname)
+        {
+            try
+            {
+                return proxy.GetGameWordsHistory(gameId, nickname);
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="gameId"></param>
+        /// <param name="nickname"></param>
+        /// <returns></returns>
+        public Dictionary<string, string> EndGame(int gameId, string nickname)
+        {
+            try
+            {
+                return proxy.EndGame(gameId, nickname);
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="gameId"></param>
+        /// <param name="nickname"></param>
+        /// <returns></returns>
+        public Dictionary<string, string> NeglectGame(int gameId, string nickname)
+        {
+            try
+            {
+                return proxy.NeglectGame(gameId, nickname);
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="gameId"></param>
+        /// <param name="nickname"></param>
+        /// <returns></returns>
+        public Dictionary<string, string> ResignGame(int gameId, string nickname)
+        {
+            try
+            {
+                return proxy.ResignGame(gameId, nickname);
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        public Dictionary<string, double> GetLeaderBoard(string type)
+        {
+            try
+            {
+                return proxy.GetLeaderBoard(type);
             }
             catch
             {

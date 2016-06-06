@@ -44,7 +44,7 @@ namespace WeGa
 
         private void setPlayerList()
         {
-            nickNameList = sc.getPlayersNm();
+            nickNameList = sc.GetPlayerNicknames();
             nickNameList.Remove((string)Application.Current.Resources["nickname"]);
             foreach (string nm in nickNameList)
             {

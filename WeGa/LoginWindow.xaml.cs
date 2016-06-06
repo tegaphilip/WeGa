@@ -53,8 +53,9 @@ namespace WeGa
                 message.Content = "Welcome boss!!!!!!! >> " + login["nickname"];
             }
 
+            string un = username.Text.Trim();
             Application.Current.Resources["username"] = un;
-            List<string> nickNameList = sc.getPlayersNm();
+            List<string> nickNameList = sc.GetPlayerNicknames();
             foreach (string nm in nickNameList)
             {
                 if (nm == un)
