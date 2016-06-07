@@ -89,9 +89,9 @@ namespace WeGa
                 wordPlayed += btn.Content.ToString();
             }
 
-            if (wordPlayed.Distinct().Count() == 1)
+            if (wordPlayed.Distinct().Count() <= 1)
             {
-                MessageBox.Show("You cannot play a single letter");
+                MessageBox.Show("You must play at least two letters");
                 return;
             }
 
