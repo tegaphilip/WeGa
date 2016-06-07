@@ -51,5 +51,11 @@
             <Setter Property="Background" Value="#4E87D4" />
             <Setter Property="Label.FontFamily" Value="Trebuchet MS"></Setter>
         </Style>
+
+        <!-- game Button style -->
+        <Style x:Key="ContestButtonStyle" TargetType="{x:Type Button}">
+            <Setter Property="Label.FontFamily" Value="Lucida Sans Italic"></Setter>
+            <Setter Property="Label.FontSize" Value="24"></Setter>
+        </Style>
     </Application.Resources>
 </Application>

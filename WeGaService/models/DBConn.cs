@@ -148,13 +148,25 @@ namespace WeGaService.models
         /// <param name="username"></param>
         /// <param name="nickname"></param>
         /// <param name="password"></param>
-        /// <returns></returns>
-        public Boolean CreateGame(String SenderNickName, String ReceiverNickName, String Letters)
+        /// <returns>the game id</returns>
+        public int CreateGame(String SenderNickName, String ReceiverNickName, String Letters)
         {
+            if (Letters == null || SenderNickName == null || ReceiverNickName == null)
+            {
+                setErrorMessage("Some of the parameters are invalid");
+                return 0;
+            }
+
             if (Letters.Distinct().Count() != 7)
             {
                 setErrorMessage("The letters must be 7 unique distinct characters");
-                return false;
+                return 0;
+            }
+
+            if (SenderNickName.Trim() == ReceiverNickName.Trim())
+            {
+                setErrorMessage("You cannot play against yourself");
+                return 0;
             }
 
             //todo use a transaction
@@ -168,13 +180,13 @@ namespace WeGaService.models
                     if (player1 == null || player2 == null)
                     {
                         setErrorMessage("Could not retreve players");
-                        return false;
+                        return 0;
                     }
 
                     if (HasUnfinishedGame(player1.id, player2.id, db))
                     {
                         setErrorMessage("You have an existing game with this user");
-                        return false;
+                        return 0;
                     }
 
                     game g = new game
@@ -197,13 +209,13 @@ namespace WeGaService.models
                     db.game_letters_history.Add(glh);
                     // Submit the change to the database.
                     db.SaveChanges();
-                    return true;
+                    return g.id;
                 }
             }
             catch (DbEntityValidationException dbEx)
             {
                 setErrorMessage(dbEx);
-                return false;
+                return 0;
             }
         }
 

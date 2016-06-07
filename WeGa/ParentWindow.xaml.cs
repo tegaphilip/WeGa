@@ -55,8 +55,8 @@ namespace WeGa
                 ResizeMode = ResizeMode.NoResize,    // remove excess caption bar buttons
                 Owner = ParentWindow.getParentWindow(),
             };
-            rw.Left = (Utils.getScreenWidth() / 2) - (this.Width / 2);
-            rw.Top = (Utils.getScreenHeight() / 2) - (this.Height / 2);
+            rw.Left = (Utils.getScreenWidth() / 2) - (rw.Width / 2);
+            rw.Top = (Utils.getScreenHeight() / 2) - (rw.Height / 2);
             rw.ShowDialog();
         }
     }

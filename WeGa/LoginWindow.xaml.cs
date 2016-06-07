@@ -66,8 +66,8 @@ namespace WeGa
 
             this.Close();
             ParentWindow parentWindow = ParentWindow.getParentWindow();
-            parentWindow.Left = (Utils.getScreenWidth() / 2) - (this.Width / 2);
-            parentWindow.Top = (Utils.getScreenHeight() / 2) - (this.Height / 2);
+            parentWindow.Left = (Utils.getScreenWidth() / 2) - (parentWindow.Width / 2);
+            parentWindow.Top = (Utils.getScreenHeight() / 2) - (parentWindow.Height / 2);
             parentWindow.Show();
             Application.Current.MainWindow.Close();
         }

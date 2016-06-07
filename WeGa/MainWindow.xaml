@@ -1,7 +1,7 @@
 ﻿<Window x:Class="WeGa.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="WeGa" Height="200" Width="500">
+        Title="WeGa" Height="200" Width="500" Icon="Icon.ico">
 
     <Grid>
         <Grid.ColumnDefinitions>

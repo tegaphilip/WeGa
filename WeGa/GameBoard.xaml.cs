@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WeGa.library;
 
 namespace WeGa
 {
@@ -20,12 +21,22 @@ namespace WeGa
     public partial class GameBoard : Window
     {
         private string letters;
+        private String currentPlayer = (String)Application.Current.Resources["nickname"];
+        private String opponentName;
+        private int gameId;
+        private ServiceClient serviceClient;
+        private int playerScore = 0;
 
-        public GameBoard()
+        public GameBoard(String opponentName, int gameId)
         {
             InitializeComponent();
+            this.opponentName = opponentName;
+            this.gameId = gameId;
             letters = (string)Application.Current.Resources["gameLetters"];
             setLettersPanel();
+            playerButton.Content = currentPlayer.ToUpper();
+            opponentButton.Content = opponentName.ToUpper();
+            serviceClient = new ServiceClient();
         }
 
 
@@ -56,8 +67,8 @@ namespace WeGa
             Button btn_clicked = (Button)sender;
             if (btn_clicked.Content.ToString() != "")
             {
+                resetLetter(char.Parse(btn_clicked.Content.ToString()));
                 btn_clicked.Content = "";
-                setLettersPanel();
             }
         }
 
@@ -65,32 +76,54 @@ namespace WeGa
         //There is a method called isNullOrWhiteSpace in c#
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
+            String wordPlayed = "";
             message.Content = "";
-            //Check if is empty and 
-            if (!isEmpty() && !isSingleLetter() && !isPlayed(getNewWord()))
+
+            var list = this.wordPanel.Children;
+            foreach (Button btn in list)
             {
-                message.Content += "The new WORD is " + getNewWord() + "\n";
-                setWord();
-                setLettersPanel();
+                if (btn.Content.Equals(""))
+                {
+                    break;
+                }
+                wordPlayed += btn.Content.ToString();
             }
+
+            if (wordPlayed.Distinct().Count() == 1)
+            {
+                MessageBox.Show("You cannot play a single letter");
+                return;
+            }
+
+            Dictionary<string, string> response = serviceClient.SendWord(wordPlayed, this.gameId, currentPlayer);
+            if (response == null || response["status"] == Constants.ERROR)
+            {
+                String errorMessage = response.ContainsKey("message") ? response["message"] : "an unknown error occurred";
+                MessageBox.Show(errorMessage);
+                return;
+            }
+
+            int score = int.Parse(response["value"]);
+            playerScore += score;
+            playerScoreButton.Content = playerScore;
+            effectReset();
+            return;
         }
 
-        //Reset all letters chosed.
-        private void btnReset_Click(object sender, RoutedEventArgs e)
+        private void effectReset()
         {
-            int i = 0;
             var btns = wordPanel.Children;
             foreach (Button btn in btns)
             {
                 btn.Content = "";
             }
-            btns = lettersPanel.Children;
-            foreach (Button btn in btns)
-            {
-                btn.Content = letters[i];
-                i++;
-            }
+            setLettersPanel();
+        }
 
+        //Reset all letters chosed.
+        private void btnReset_Click(object sender, RoutedEventArgs e)
+        {
+            effectReset();
         }
 
         //Check if the word to be added is empty.
@@ -181,6 +214,21 @@ namespace WeGa
             {
                 //MessageBox.Show(btn.ToString());         
                 btn.Content = letters[i];
+                i++;
+            }
+        }
+
+        //Reset a clicked letters
+        private void resetLetter(char letter)
+        {
+            var list = this.lettersPanel.Children;
+            int i = 0;
+            foreach (Button btn in list)
+            {
+                if (letters[i] == letter)
+                {
+                    btn.Content = letters[i];
+                }
                 i++;
             }
         }
