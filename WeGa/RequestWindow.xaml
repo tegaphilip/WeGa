@@ -1,7 +1,7 @@
 ﻿<Window x:Class="WeGa.RequestWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="RequestWindow" Height="300" Width="300">
+        Title="Send Game Request" Height="300" Width="300">
     <Grid Name="grid">
         <Grid.RowDefinitions>
         </Grid.RowDefinitions>

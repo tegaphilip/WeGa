@@ -171,6 +171,12 @@ namespace WeGaService.models
                         return false;
                     }
 
+                    if (HasUnfinishedGame(player1.id, player2.id, db))
+                    {
+                        setErrorMessage("You have an existing game with this user");
+                        return false;
+                    }
+
                     game g = new game
                     {
                         player1_id = player1.id,
@@ -199,6 +205,12 @@ namespace WeGaService.models
                 setErrorMessage(dbEx);
                 return false;
             }
+        }
+
+        private Boolean HasUnfinishedGame(int SenderId, int ReceiverId, WegaEntities db)
+        {
+            game gam = db.games.FirstOrDefault(g => ((g.player1_id == SenderId && g.player2_id == ReceiverId) || (g.player2_id == SenderId && g.player1_id == ReceiverId)) && g.date_ended == null);
+            return gam != null;
         }
 
         /// <summary>
@@ -579,7 +591,7 @@ namespace WeGaService.models
                     {
                         throw new Exception("This player is not playing this game");
                     }
-
+                    currentGame.date_ended = DateTime.Now;
                     db.SaveChanges();
                     return true;
                 }

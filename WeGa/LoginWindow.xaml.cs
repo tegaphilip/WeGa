@@ -53,6 +53,8 @@ namespace WeGa
                 message.Content = "Welcome boss!!!!!!! >> " + login["nickname"];
             }
 
+            //close main window once login is successful
+            //this.Owner.Close();
             string un = username.Text.Trim();
             Application.Current.Resources["username"] = un;
             List<string> nickNameList = sc.GetPlayerNicknames();
@@ -63,10 +65,11 @@ namespace WeGa
             }
 
             this.Close();
-            RequestWindow rw = new RequestWindow();
-            rw.Left = (Utils.getScreenWidth() / 2) - (this.Width / 2);
-            rw.Top = (Utils.getScreenHeight() / 2) - (this.Height / 2);
-            rw.Show();
+            ParentWindow parentWindow = ParentWindow.getParentWindow();
+            parentWindow.Left = (Utils.getScreenWidth() / 2) - (this.Width / 2);
+            parentWindow.Top = (Utils.getScreenHeight() / 2) - (this.Height / 2);
+            parentWindow.Show();
+            Application.Current.MainWindow.Close();
         }
     }
 }

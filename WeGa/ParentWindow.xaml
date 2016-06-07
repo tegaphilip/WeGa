@@ -1,0 +1,17 @@
+﻿<Window x:Class="WeGa.ParentWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="WeGa" Height="600" Width="600">
+    <Grid>
+        <DockPanel>
+            <Menu DockPanel.Dock="Top" IsMainMenu="True">
+                <MenuItem Header="Options" >
+                    <MenuItem x:Name="Start" Header="Start New Game" Click="Start_Click"/>
+                    <MenuItem Header="XYZ"/>
+                    <MenuItem Header="Quit"/>
+                </MenuItem>
+            </Menu>
+            <StackPanel></StackPanel>
+        </DockPanel>
+    </Grid>
+</Window>
