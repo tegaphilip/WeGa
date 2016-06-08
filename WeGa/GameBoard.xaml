@@ -51,7 +51,8 @@
             <Button Content="Timer" Height="60"/>
             <Button Content="Words Played"/>
             <Grid Name="wordList" Height="Auto" Width="Auto">
-                
+                <ListBox Name="wordsAlreadyPlayed" Height="Auto" VerticalAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                </ListBox>
             </Grid>
         </StackPanel>
 
@@ -72,6 +73,7 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
+                <ColumnDefinition Width="5"/>
             </Grid.ColumnDefinitions>
 
             <Button Grid.Column="0" Content=""  Click="btn_word_Click"/>
@@ -81,10 +83,11 @@
             <Button Grid.Column="4" Content=""  Click="btn_word_Click"/>
             <Button Grid.Column="5" Content=""  Click="btn_word_Click"/>
             <Button Grid.Column="6" Content=""  Click="btn_word_Click"/>
-            <Button Grid.Column="7" Content=""  Click="btn_word_Click"/>         
+            <Button Grid.Column="7" Content=""  Click="btn_word_Click"/>
+            <Button Grid.Column="8" Content=""/>
         </Grid>
-        <Button Content="btnReset" Click="btnReset_Click" Width="70" Height="30"  />
-        <Button Content="btnAdd" Click="btnAdd_Click" Width="70" Height="30" />
-        <Button Content="btnResine" Width="70" Height="30" />
+        <Button Content="Reset" Click="btnReset_Click" Width="70" Height="30"  />
+        <Button Content="Send Word" Click="btnAdd_Click" Width="70" Height="30" />
+        <Button Content="Resign" Width="70" Height="30" />
     </DockPanel>
 </Window>

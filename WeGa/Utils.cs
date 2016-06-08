@@ -22,7 +22,8 @@ namespace WeGa
         }
 
         //Method to get shuffled letters.
-        public static string getLetters() {
+        public static string getLetters()
+        {
             Random rnd = new Random();
             char c;
             string letters = "";
@@ -38,6 +39,7 @@ namespace WeGa
                 if (!letters.Contains(c))
                     letters += c;
             } while (letters.Length < 7);
+
             return letters;
         }
     }

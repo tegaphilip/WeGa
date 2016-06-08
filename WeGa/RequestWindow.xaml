@@ -10,7 +10,7 @@
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <ListBox Name="playerList" Grid.Column="0" Height="269" VerticalAlignment="Bottom">
+        <ListBox Name="playerList" Grid.Column="0" Height="269" VerticalAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Visible">
             <ListBoxItem> Player List:</ListBoxItem>
         </ListBox>
         <Button Grid.Row= "1" x:Name="btn"  Content="Send Request" HorizontalAlignment="Left" VerticalAlignment="Top"  Click="Button_Click"  Style="{StaticResource buttonStyle}" Margin="10,8,0,0" Grid.Column="1"/>

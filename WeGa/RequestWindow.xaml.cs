@@ -38,9 +38,9 @@ namespace WeGa
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             int selectedIndex = playerList.SelectedIndex;
-            if (selectedIndex == 0)
+            if (selectedIndex <= 0 || selectedIndex == null)
             {
-                MessageBox.Show("An invalid item was selected");
+                MessageBox.Show("Please select a player");
                 return;
             }
 
@@ -58,8 +58,9 @@ namespace WeGa
 
             this.Close();
             Window gb = new GameBoard(receivedNickName, int.Parse(response["game_id"]));
+            gb.Left = (Utils.getScreenWidth() / 2) - (gb.Width / 2);
+            gb.Top = (Utils.getScreenHeight() / 2) - (gb.Height / 2);
             gb.ShowDialog();
-
         }
 
         private void setPlayerList()

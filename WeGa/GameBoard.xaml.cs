@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,21 +27,33 @@ namespace WeGa
         private int gameId;
         private ServiceClient serviceClient;
         private int playerScore = 0;
+        ArrayList wordsAlreadyPlayedArrayList = new ArrayList();
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="opponentName"></param>
+        /// <param name="gameId"></param>
         public GameBoard(String opponentName, int gameId)
         {
             InitializeComponent();
             this.opponentName = opponentName;
             this.gameId = gameId;
             letters = (string)Application.Current.Resources["gameLetters"];
-            setLettersPanel();
+            this.Title = currentPlayer.ToUpper() + " VS " + opponentName.ToUpper();
             playerButton.Content = currentPlayer.ToUpper();
             opponentButton.Content = opponentName.ToUpper();
             serviceClient = new ServiceClient();
+            setLettersPanel();
         }
 
 
-        //Get the letter by the letter_button's content, set to content of the first empty word_button 
+         
+        /// <summary>
+        /// Get the letter by the letter_button's content, set to content of the first empty word_button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_Letter_Click(object sender, RoutedEventArgs e)
         {
             Button btn_clicked = (Button)sender;
@@ -61,7 +74,11 @@ namespace WeGa
             }
         }
 
-        //Clear content of btn clicked and set the value back to letters panel
+        /// <summary>
+        /// Clear content of btn clicked and set the value back to letters panel
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_word_Click(object sender, RoutedEventArgs e)
         {
             Button btn_clicked = (Button)sender;
@@ -73,25 +90,23 @@ namespace WeGa
         }
 
 
-        //There is a method called isNullOrWhiteSpace in c#
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            String wordPlayed = "";
-            message.Content = "";
-
-            var list = this.wordPanel.Children;
-            foreach (Button btn in list)
-            {
-                if (btn.Content.Equals(""))
-                {
-                    break;
-                }
-                wordPlayed += btn.Content.ToString();
-            }
-
+            String wordPlayed = getNewWord();
             if (wordPlayed.Distinct().Count() <= 1)
             {
                 MessageBox.Show("You must play at least two letters");
+                return;
+            }
+
+            if (isPlayed(wordPlayed))
+            {
+                MessageBox.Show("Word previously played");
                 return;
             }
 
@@ -103,6 +118,7 @@ namespace WeGa
                 return;
             }
 
+            setWord(wordPlayed);
             int score = int.Parse(response["value"]);
             playerScore += score;
             playerScoreButton.Content = playerScore;
@@ -110,6 +126,9 @@ namespace WeGa
             return;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void effectReset()
         {
             var btns = wordPanel.Children;
@@ -120,40 +139,10 @@ namespace WeGa
             setLettersPanel();
         }
 
-        //Reset all letters chosed.
+        //Reset all letters chosen.
         private void btnReset_Click(object sender, RoutedEventArgs e)
         {
             effectReset();
-        }
-
-        //Check if the word to be added is empty.
-        private bool isEmpty()
-        {
-            Button element = wordPanel.Children.Cast<Button>().FirstOrDefault(e => Grid.GetColumn(e) == 0 && Grid.GetRow(e) == 0);
-            //Need to be deleted at the end.
-            if (element.Content.Equals("") || element == null)
-            {
-                message.Content += "From btnAdd_Click: You haven't enter any words!\n";
-                return true;
-            }
-            return false;
-        }
-
-        //Check if the word to be added is a single letter.
-        private bool isSingleLetter()
-        {
-            Button element = wordPanel.Children.Cast<Button>().FirstOrDefault(e => Grid.GetColumn(e) == 1 && Grid.GetRow(e) == 0);
-            if (!isEmpty())
-            {
-                if (element.Content.Equals("") || element == null)
-                {
-                    message.Content += "From btnAdd_Click: A single letter dosent count!\n";
-                    return true;
-                }
-                else
-                    return false;
-            }
-            return false;
         }
 
         //Concatenate the letters to a word.
@@ -163,10 +152,11 @@ namespace WeGa
             var list = this.wordPanel.Children;
             foreach (Button btn in list)
             {
-                if (!btn.Content.Equals(""))
-                    newWord += btn.Content;
-                else
+                if (btn.Content.Equals(""))
+                {
                     break;
+                }
+                newWord += btn.Content.ToString();
             }
             return newWord;
         }
@@ -174,35 +164,16 @@ namespace WeGa
         //Check if the word has been added
         private bool isPlayed(string wordSubmited)
         {
-            var list = this.wordList.Children;
-            foreach (Button btn in list)
-            {
-                if (btn.Content.Equals(wordSubmited))
-                {
-                    message.Content += "You have added this word!";
-                    return true;
-                }
-            }
-            return false;
+            return wordsAlreadyPlayedArrayList.Contains(wordSubmited);
         }
 
         //Set the new word to word list.
-        private void setWord()
+        private void setWord(String word)
         {
-            Button newWord = new Button();
-            newWord.Height = 30;
-            newWord.Width = 50;
-            newWord.Content = getNewWord();
-
-            RowDefinition newRow = new RowDefinition();
-            newRow.Height = new GridLength(50);
-            wordList.RowDefinitions.Add(newRow);
-            wordList.Children.Add(newWord);
-
-            message.Content += wordList.Children.Count.ToString() + "\n";
-
-            Grid.SetRow(newWord, wordList.Children.Count);
-            Grid.SetColumn(newWord, 0);
+            wordsAlreadyPlayedArrayList.Add(word);
+            ListBoxItem item = new ListBoxItem();
+            item.Content = word;
+            wordsAlreadyPlayed.Items.Add(item);
         }
 
         //Set the shuffered letters
@@ -211,14 +182,13 @@ namespace WeGa
             var list = this.lettersPanel.Children;
             int i = 0;
             foreach (Button btn in list)
-            {
-                //MessageBox.Show(btn.ToString());         
+            {        
                 btn.Content = letters[i];
                 i++;
             }
         }
 
-        //Reset a clicked letters
+        //Reset a clicked letter
         private void resetLetter(char letter)
         {
             var list = this.lettersPanel.Children;
