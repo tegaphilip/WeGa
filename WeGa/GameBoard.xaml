@@ -1,9 +1,27 @@
 ﻿<Window x:Class="WeGa.GameBoard"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="GameBoard" Height="400" Width="550">
+        Title="GameBoard" Height="400" Width="600" Icon="Icon.ico">
 
     <DockPanel>
+        <Grid DockPanel.Dock="Top" Margin="5" Height="60">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="120"/>
+                <ColumnDefinition Width="120"/>
+                <ColumnDefinition Width="120"/>
+                <ColumnDefinition Width="120"/>
+                <ColumnDefinition Width="120"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60" />
+            </Grid.RowDefinitions>
+            <Button Grid.Column="0" Grid.Row="0" Content="player" Name="playerButton" Style="{StaticResource ContestButtonStyle}"/>
+            <Button Grid.Column="1" Grid.Row="0" Content="0" Name="playerScoreButton" Style="{StaticResource ContestButtonStyle}"/>
+            <Button Grid.Column="2" Grid.Row="0" Content="VS" Name="ContestButton2" Style="{StaticResource ContestButtonStyle}"/>
+            <Button Grid.Column="3" Grid.Row="0" Content="***" Name="opponentScoreButton" Style="{StaticResource ContestButtonStyle}"/>
+            <Button Grid.Column="4" Grid.Row="0" Content="opponent" Name="opponentButton" Style="{StaticResource ContestButtonStyle}"/>
+        </Grid>
+        
         <StackPanel DockPanel.Dock="Left" Height="Auto" Margin="5" VerticalAlignment="Center">
             <Button Content="Letters"/>
             <Grid Name="lettersPanel" Height="Auto" Width="Auto">
@@ -29,20 +47,13 @@
             </Grid>
         </StackPanel>
 
-
-        <Grid Name="wordList" DockPanel.Dock="Right" Margin="10" ShowGridLines="True" VerticalAlignment="Top">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="100"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="50" />
-            </Grid.RowDefinitions>
-            <Button Content="Timer" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        </Grid>
-
-        <Grid DockPanel.Dock="Top" Margin="5" Height="60">
-            <Button Content="dock top"/>
-        </Grid>
+        <StackPanel DockPanel.Dock="Right" Height="Auto" Margin="5" VerticalAlignment="Top">
+            <Button Content="Timer" Height="60"/>
+            <Button Content="Words Played"/>
+            <Grid Name="wordList" Height="Auto" Width="Auto">
+                
+            </Grid>
+        </StackPanel>
 
         <Grid DockPanel.Dock="Bottom" Margin="10">
             <Button Content="bottom"/>

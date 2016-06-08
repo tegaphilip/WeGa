@@ -22,6 +22,11 @@ namespace WeGa
     {
         ServiceClient sc;
         List<string> nickNameList;
+        String receivedNickName;
+        String gameLetters;
+        
+        //hack into listbox
+        Dictionary<int, string> nickNamesDictionary;
 
         public RequestWindow()
         {
@@ -32,25 +37,51 @@ namespace WeGa
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Application.Current.Resources["gameLetters"] = Utils.getLetters();
-            //send game request
-            //string = "INSERT INTO games Values()";--create a game
+            int selectedIndex = playerList.SelectedIndex;
+            if (selectedIndex == 0)
+            {
+                MessageBox.Show("An invalid item was selected");
+                return;
+            }
+
+            receivedNickName = nickNamesDictionary[selectedIndex-1];
+            gameLetters = Utils.getLetters();
+            Application.Current.Resources["gameLetters"] = gameLetters;
+            Dictionary<String, String> response = sc.CreateGame((String)Application.Current.Resources["nickname"], receivedNickName, gameLetters);
+
+            if (response == null || response["status"] == Constants.ERROR)
+            {
+                String errorMessage = response.ContainsKey("message") ? response["message"] : "an unknown error occurred";
+                MessageBox.Show(errorMessage);
+                return;
+            }
 
             this.Close();
-            Window gb = new GameBoard();
-            gb.Show();
+            Window gb = new GameBoard(receivedNickName, int.Parse(response["game_id"]));
+            gb.ShowDialog();
 
         }
 
         private void setPlayerList()
         {
             nickNameList = sc.GetPlayerNicknames();
-            nickNameList.Remove((string)Application.Current.Resources["nickname"]);
-            foreach (string nm in nickNameList)
+            if (nickNameList == null)
             {
-                ListBoxItem item = new ListBoxItem();
-                item.Content = nm;
-                playerList.Items.Add(item);
+                MessageBox.Show("There are no available players at the moment");
+            }
+            else
+            {
+                nickNameList.Remove((string)Application.Current.Resources["nickname"]);
+                int i = 0;
+                nickNamesDictionary = new Dictionary<int, string>();
+                foreach (string nm in nickNameList)
+                {
+                    ListBoxItem item = new ListBoxItem();
+                    item.Content = nm;
+                    playerList.Items.Add(item);
+                    nickNamesDictionary.Add(i, nm);
+                    i++;
+                }
             }
         }
 

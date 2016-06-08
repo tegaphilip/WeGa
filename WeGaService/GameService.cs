@@ -73,9 +73,11 @@ namespace WeGaService
         {
             Dictionary<String, String> response = new Dictionary<string, string>();
             response["status"] = ERROR;
-            if (new DBConn().CreateGame(SenderNickName, ReceiverNickName, Letters))
+            int gameId = new DBConn().CreateGame(SenderNickName, ReceiverNickName, Letters);
+            if (gameId != 0)
             {
                 response["status"] = SUCCESS;
+                response["game_id"] = gameId + "";
             }
             else
             {
