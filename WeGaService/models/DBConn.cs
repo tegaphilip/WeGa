@@ -40,7 +40,7 @@ namespace WeGaService.models
                 {
                     if (!Util.VeriFyPassword(pwd, user.password))
                     {
-                        setErrorMessage("The username and password combination is invalid");
+                        setErrorMessage("The username and password combination is invalid2");
                         return null;
                     }
                     return user;
