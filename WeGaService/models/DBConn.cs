@@ -261,12 +261,22 @@ namespace WeGaService.models
 
                     //otherwise update user score and insert word and 
                     int score = Util.ComputeScore(wordPlayed);
+                    bool player1Ended = currentGame.player1_ended == null ? false : true;
+                    bool player2Ended = currentGame.player2_ended == null ? false : true;
                     if (currentGame.player1_id == currentPlayer.id)
                     {
+                        if (player1Ended)
+                        {
+                            throw new Exception("You have already ended this game");
+                        }
                         currentGame.player1_score = (int)currentGame.player1_score + score;
                     }
                     else if (currentGame.player2_id == currentPlayer.id)
                     {
+                        if (player2Ended)
+                        {
+                            throw new Exception("You have already ended this game");
+                        }
                         currentGame.player2_score = (int)currentGame.player2_score + score;
                     }
                     else
@@ -547,7 +557,11 @@ namespace WeGaService.models
                         throw new Exception("This player is not playing this game");
                     }
 
-                    if ((bool)currentGame.player1_ended && (bool)currentGame.player2_ended && !currentGame.game_neglected)
+                    bool player1Ended = currentGame.player1_ended == null ? false : true;
+                    bool player2Ended = currentGame.player2_ended == null ? false : true;
+                    bool gameNotNeglected = !currentGame.game_neglected;
+
+                    if (player1Ended && player2Ended && gameNotNeglected)
                     {
                         //game has ended, set winner
                         if (currentGame.player1_score > (int)currentGame.player2_score)
@@ -710,6 +724,34 @@ namespace WeGaService.models
             {
                 setErrorMessage(e);
                 return null;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public bool PingDatabase()
+        {
+            try
+            {
+                using (WegaEntities db = new WegaEntities())
+                {
+                    try
+                    {
+                        db.games.FirstOrDefault(g => g.id == 1);
+                        return true;
+                    }
+                    catch (Exception e)
+                    {
+                        return false;
+                    }
+                }
+            }
+            catch (DbEntityValidationException dbEx)
+            {
+                setErrorMessage(dbEx);
+                return false;
             }
         }
     }

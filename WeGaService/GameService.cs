@@ -210,5 +210,14 @@ namespace WeGaService
         {
             return new DBConn().GetLeaderBoard(type);
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public bool PingDatabase()
+        {
+            return new DBConn().PingDatabase();
+        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 using WeGa.library;
 
 namespace WeGa
@@ -28,6 +30,10 @@ namespace WeGa
         private ServiceClient serviceClient;
         private int playerScore = 0;
         ArrayList wordsAlreadyPlayedArrayList = new ArrayList();
+        const int GAME_TIME = 30;
+        bool timeUp;
+        DispatcherTimer dispatcherTimer;
+        TimeSpan timeSpan;
 
         /// <summary>
         /// 
@@ -45,10 +51,11 @@ namespace WeGa
             opponentButton.Content = opponentName.ToUpper();
             serviceClient = new ServiceClient();
             setLettersPanel();
+            StartTimer();
         }
 
 
-         
+
         /// <summary>
         /// Get the letter by the letter_button's content, set to content of the first empty word_button
         /// </summary>
@@ -182,7 +189,7 @@ namespace WeGa
             var list = this.lettersPanel.Children;
             int i = 0;
             foreach (Button btn in list)
-            {        
+            {
                 btn.Content = letters[i];
                 i++;
             }
@@ -201,6 +208,79 @@ namespace WeGa
                 }
                 i++;
             }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void StartTimer()
+        {
+            this.timeUp = false;
+            timeSpan = TimeSpan.FromSeconds(GAME_TIME);
+
+            dispatcherTimer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate
+            {
+                TimerButton.Content = timeSpan.ToString("c").Substring(3);
+                if (timeSpan == TimeSpan.Zero)
+                {
+                    dispatcherTimer.Stop();
+                    this.timeUp = true;
+                    EndGame();
+                }
+                timeSpan = timeSpan.Add(TimeSpan.FromSeconds(-1));
+            }, Application.Current.Dispatcher);
+
+            dispatcherTimer.Start();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void EndGame()
+        {
+            String alert = " Submitting Game....";
+            if (this.timeUp)
+            {
+                alert = "Time's up. \n" + alert;
+            }
+            MessageBox.Show(alert);
+            Dictionary<string, string> response = serviceClient.EndGame(this.gameId, currentPlayer);
+            if (response == null || response["status"] == Constants.ERROR)
+            {
+                String errorMessage = response.ContainsKey("message") ? response["message"] : "an unknown error occurred";
+                MessageBox.Show(errorMessage);
+            }
+            else
+            {
+                MessageBox.Show("Game Ended. \nView results from menu bar");
+            }
+            if (this.timeUp)
+            {
+                this.Close();
+            }
+        }
+
+        private void Window_Closing(object sender, CancelEventArgs e)
+        {
+            if (!this.timeUp)
+            {
+                dispatcherTimer.Stop();
+                MessageBoxResult result = MessageBox.Show("Do you want to end this game?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (result == MessageBoxResult.Yes)
+                {
+                    EndGame();
+                }
+                else
+                {
+                    dispatcherTimer.Start();
+                    e.Cancel = true;
+                }
+            }
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+
         }
     }
 }

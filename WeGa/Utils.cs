@@ -40,7 +40,36 @@ namespace WeGa
                     letters += c;
             } while (letters.Length < 7);
 
-            return letters;
+            return new string(letters.ToCharArray().OrderBy(s => (rnd.Next(2) % 2) == 0).ToArray());
+
+            //return letters;
+        }
+
+        public static string[] RandomizeStrings(string[] arr)
+        {
+            Random _random = new Random();
+            List<KeyValuePair<int, string>> list = new List<KeyValuePair<int, string>>();
+            // Add all strings from array
+            // Add new random int each time
+            foreach (string s in arr)
+            {
+                list.Add(new KeyValuePair<int, string>(_random.Next(), s));
+            }
+            // Sort the list by the random number
+            var sorted = from item in list
+                         orderby item.Key
+                         select item;
+            // Allocate new string array
+            string[] result = new string[arr.Length];
+            // Copy values to array
+            int index = 0;
+            foreach (KeyValuePair<int, string> pair in sorted)
+            {
+                result[index] = pair.Value;
+                index++;
+            }
+            // Return copied array
+            return result;
         }
     }
 }

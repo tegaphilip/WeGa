@@ -73,6 +73,12 @@
   <wsdl:message name="IGameService_GetLeaderBoard_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetLeaderBoardResponse" />
   </wsdl:message>
+  <wsdl:message name="IGameService_PingDatabase_InputMessage">
+    <wsdl:part name="parameters" element="tns:PingDatabase" />
+  </wsdl:message>
+  <wsdl:message name="IGameService_PingDatabase_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PingDatabaseResponse" />
+  </wsdl:message>
   <wsdl:portType name="IGameService">
     <wsdl:operation name="Login">
       <wsdl:input wsaw:Action="http://tempuri.org/IGameService/Login" message="tns:IGameService_Login_InputMessage" />
@@ -117,6 +123,10 @@
     <wsdl:operation name="GetLeaderBoard">
       <wsdl:input wsaw:Action="http://tempuri.org/IGameService/GetLeaderBoard" message="tns:IGameService_GetLeaderBoard_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IGameService/GetLeaderBoardResponse" message="tns:IGameService_GetLeaderBoard_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="PingDatabase">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGameService/PingDatabase" message="tns:IGameService_PingDatabase_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGameService/PingDatabaseResponse" message="tns:IGameService_PingDatabase_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IGameService" type="tns:IGameService">
@@ -213,6 +223,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetLeaderBoard">
       <soap:operation soapAction="http://tempuri.org/IGameService/GetLeaderBoard" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PingDatabase">
+      <soap:operation soapAction="http://tempuri.org/IGameService/PingDatabase" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
