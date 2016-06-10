@@ -38,15 +38,14 @@ namespace WeGa
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             int selectedIndex = playerList.SelectedIndex;
-            if (selectedIndex == 0)
+            if (selectedIndex <= 0 || selectedIndex == null)
             {
-                MessageBox.Show("An invalid item was selected");
+                MessageBox.Show("Please select a player");
                 return;
             }
 
             receivedNickName = nickNamesDictionary[selectedIndex-1];
             gameLetters = Utils.getLetters();
-            Application.Current.Resources["gameLetters"] = gameLetters;
             Dictionary<String, String> response = sc.CreateGame((String)Application.Current.Resources["nickname"], receivedNickName, gameLetters);
 
             if (response == null || response["status"] == Constants.ERROR)
@@ -57,9 +56,10 @@ namespace WeGa
             }
 
             this.Close();
-            Window gb = new GameBoard(receivedNickName, int.Parse(response["game_id"]));
+            Window gb = new GameBoard(receivedNickName, int.Parse(response["game_id"]), gameLetters);
+            gb.Left = (Utils.getScreenWidth() / 2) - (gb.Width / 2);
+            gb.Top = (Utils.getScreenHeight() / 2) - (gb.Height / 2);
             gb.ShowDialog();
-
         }
 
         private void setPlayerList()

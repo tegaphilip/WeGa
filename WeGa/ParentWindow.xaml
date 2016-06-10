@@ -7,7 +7,8 @@
             <Menu DockPanel.Dock="Top" IsMainMenu="True">
                 <MenuItem Header="Options" >
                     <MenuItem x:Name="Start" Header="Start New Game" Click="Start_Click"/>
-                    <MenuItem Header="XYZ"/>
+                    <MenuItem Header="View Game Requests" Click="Game_Request_Click"/>
+                    <MenuItem Header="See Game Results"/>
                     <MenuItem Header="Quit"/>
                 </MenuItem>
             </Menu>

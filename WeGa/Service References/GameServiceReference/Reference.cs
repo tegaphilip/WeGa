@@ -80,6 +80,12 @@ namespace WeGa.GameServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/GetLeaderBoard", ReplyAction="http://tempuri.org/IGameService/GetLeaderBoardResponse")]
         System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, double>> GetLeaderBoardAsync(string type);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/PingDatabase", ReplyAction="http://tempuri.org/IGameService/PingDatabaseResponse")]
+        bool PingDatabase();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/PingDatabase", ReplyAction="http://tempuri.org/IGameService/PingDatabaseResponse")]
+        System.Threading.Tasks.Task<bool> PingDatabaseAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -195,6 +201,14 @@ namespace WeGa.GameServiceReference {
         
         public System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, double>> GetLeaderBoardAsync(string type) {
             return base.Channel.GetLeaderBoardAsync(type);
+        }
+        
+        public bool PingDatabase() {
+            return base.Channel.PingDatabase();
+        }
+        
+        public System.Threading.Tasks.Task<bool> PingDatabaseAsync() {
+            return base.Channel.PingDatabaseAsync();
         }
     }
 }

@@ -216,5 +216,21 @@ namespace WeGa.library
                 return null;
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public bool Ping()
+        {
+            try
+            {
+                return proxy.PingDatabase();
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
 }
