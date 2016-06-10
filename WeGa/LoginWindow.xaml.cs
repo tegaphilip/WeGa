@@ -42,29 +42,22 @@ namespace WeGa
             }
 
             ServiceClient sc = new ServiceClient();
-            Dictionary<String, String> login = sc.Login(username.Text, password.Password);
-            if (login["status"] == Constants.ERROR)
+            Dictionary<String, String> response = sc.Login(username.Text, password.Password);
+            if (response["status"] == Constants.ERROR)
             {
-                message.Content = login["message"];
+                message.Content = response["message"];
                 return;
             }
             else
             {
-                message.Content = "Welcome boss!!!!!!! >> " + login["nickname"];
+                message.Content = "Welcome boss!!!!!!! >> " + response["nickname"];
             }
 
-            //close main window once login is successful
-            //this.Owner.Close();
-            string un = username.Text.Trim();
-            Application.Current.Resources["username"] = un;
-            List<string> nickNameList = sc.GetPlayerNicknames();
-            foreach (string nm in nickNameList)
-            {
-                if (nm == un)
-                    Application.Current.Resources["nickname"] = nm;
-            }
-
+            Application.Current.Resources["username"] = response["username"];
+            Application.Current.Resources["nickname"] = response["nickname"];
+            
             this.Close();
+
             ParentWindow parentWindow = ParentWindow.getParentWindow();
             parentWindow.Left = (Utils.getScreenWidth() / 2) - (parentWindow.Width / 2);
             parentWindow.Top = (Utils.getScreenHeight() / 2) - (parentWindow.Height / 2);

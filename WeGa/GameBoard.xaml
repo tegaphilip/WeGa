@@ -88,6 +88,6 @@
         </Grid>
         <Button Content="Reset" Click="btnReset_Click" Width="70" Height="30"  />
         <Button Content="Send Word" Click="btnAdd_Click" Width="70" Height="30" />
-        <Button Content="Resign" Width="70" Height="30" />
+        <Button Content="Resign" Width="70" Height="30" Click="btnResign_Click"/>
     </DockPanel>
 </Window>

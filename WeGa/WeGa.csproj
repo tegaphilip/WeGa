@@ -66,6 +66,9 @@
     <Compile Include="ParentWindow.xaml.cs">
       <DependentUpon>ParentWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PendingRequests.xaml.cs">
+      <DependentUpon>PendingRequests.xaml</DependentUpon>
+    </Compile>
     <Compile Include="RegisterWindow.xaml.cs">
       <DependentUpon>RegisterWindow.xaml</DependentUpon>
     </Compile>
@@ -102,6 +105,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="ParentWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PendingRequests.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

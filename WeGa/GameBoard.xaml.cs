@@ -30,7 +30,7 @@ namespace WeGa
         private ServiceClient serviceClient;
         private int playerScore = 0;
         ArrayList wordsAlreadyPlayedArrayList = new ArrayList();
-        const int GAME_TIME = 30;
+        const int GAME_TIME = 120;
         bool timeUp;
         DispatcherTimer dispatcherTimer;
         TimeSpan timeSpan;
@@ -40,12 +40,12 @@ namespace WeGa
         /// </summary>
         /// <param name="opponentName"></param>
         /// <param name="gameId"></param>
-        public GameBoard(String opponentName, int gameId)
+        public GameBoard(String opponentName, int gameId, String gameLetters)
         {
             InitializeComponent();
             this.opponentName = opponentName;
             this.gameId = gameId;
-            letters = (string)Application.Current.Resources["gameLetters"];
+            this.letters = gameLetters;
             this.Title = currentPlayer.ToUpper() + " VS " + opponentName.ToUpper();
             playerButton.Content = currentPlayer.ToUpper();
             opponentButton.Content = opponentName.ToUpper();
@@ -53,8 +53,6 @@ namespace WeGa
             setLettersPanel();
             StartTimer();
         }
-
-
 
         /// <summary>
         /// Get the letter by the letter_button's content, set to content of the first empty word_button
@@ -243,7 +241,8 @@ namespace WeGa
             {
                 alert = "Time's up. \n" + alert;
             }
-            MessageBox.Show(alert);
+            message.Content = alert;
+
             Dictionary<string, string> response = serviceClient.EndGame(this.gameId, currentPlayer);
             if (response == null || response["status"] == Constants.ERROR)
             {
@@ -258,7 +257,7 @@ namespace WeGa
             {
                 this.Close();
             }
-        }
+        }   
 
         private void Window_Closing(object sender, CancelEventArgs e)
         {
@@ -281,6 +280,26 @@ namespace WeGa
         private void Window_Closed(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnResign_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show("Do you want to resign this game? It will count as a loss", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                Dictionary<string, string> response = serviceClient.ResignGame(this.gameId, currentPlayer);
+                if (response == null || response["status"] == Constants.ERROR)
+                {
+                    String errorMessage = response.ContainsKey("message") ? response["message"] : "an unknown error occurred";
+                    MessageBox.Show(errorMessage);
+                }
+                else
+                {
+                    MessageBox.Show("You have lost this game!");
+                    this.timeUp = true;
+                    this.Close();
+                }
+            }
         }
     }
 }
