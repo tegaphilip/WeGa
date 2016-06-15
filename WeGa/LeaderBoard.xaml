@@ -7,9 +7,16 @@
             <TabItem Header="Total">
                 <Grid ShowGridLines="True" Margin="5">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition/>
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
+                    <ListBox Name="total_nickname" Height="100" Grid.Column="0"  VerticalAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                        <ListBoxItem>Nickname</ListBoxItem>
+                    </ListBox>
+                    <ListBox Name="total_score" Height="100" Grid.Column="1" VerticalAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                        <ListBoxItem>Score</ListBoxItem>
+                    </ListBox>
+                    <Label Name="label"  HorizontalAlignment="Left" Margin="53,136,0,0" VerticalAlignment="Top"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Average">
@@ -18,6 +25,12 @@
                         <ColumnDefinition></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
+                    <ListBox Name="avg_nickname" Grid.Column="0" VerticalAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                        <ListBoxItem>Nickname</ListBoxItem>
+                    </ListBox>
+                    <ListBox Name="avg_score" Grid.Column="1" VerticalAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                        <ListBoxItem>Score</ListBoxItem>
+                    </ListBox>
                 </Grid>
             </TabItem>
             <TabItem Header="Details" />

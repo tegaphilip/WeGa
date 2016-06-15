@@ -80,5 +80,11 @@ namespace WeGa
             pendingRequestsWindow.Top = (Utils.getScreenHeight() / 2) - (pendingRequestsWindow.Height / 2);
             pendingRequestsWindow.ShowDialog();
         }
+
+        private void Game_Result_Click(object sender, RoutedEventArgs e)
+        {
+            LeaderBoard lb = new LeaderBoard();
+            lb.Show();
+        }
     }
 }
