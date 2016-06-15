@@ -55,6 +55,7 @@ namespace WeGa
 
             Application.Current.Resources["username"] = response["username"];
             Application.Current.Resources["nickname"] = response["nickname"];
+            Application.Current.Resources["id"] = response["id"];
             
             this.Close();
 

@@ -1,15 +1,15 @@
 ﻿<Window x:Class="WeGa.ParentWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="WeGa" Height="600" Width="600" Icon="Icon.ico">
+        Title="WeGa" Height="600" Width="600" Icon="Icon.ico" Closing="Window_Closing">
     <Grid>
         <DockPanel>
             <Menu DockPanel.Dock="Top" IsMainMenu="True">
                 <MenuItem Header="Options" >
                     <MenuItem x:Name="Start" Header="Start New Game" Click="Start_Click"/>
                     <MenuItem Header="View Game Requests" Click="Game_Request_Click"/>
-                    <MenuItem Header="See Game Results"/>
-                    <MenuItem Header="Quit"/>
+                    <MenuItem Header="See Game Results" Click="Game_Results_MenuItem_Click"/>
+                    <MenuItem Header="Quit" Click="QuitMenuItem_Click"/>
                 </MenuItem>
             </Menu>
             <StackPanel></StackPanel>

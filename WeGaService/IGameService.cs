@@ -46,5 +46,8 @@ namespace WeGaService
 
         [OperationContract]
         bool PingDatabase();
+
+        [OperationContract]
+        List<Dictionary<String, String>> GetResults(String nickname);
     }
 }

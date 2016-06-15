@@ -50,10 +50,10 @@
         <StackPanel DockPanel.Dock="Right" Height="Auto" Margin="5" VerticalAlignment="Top">
             <Button Name="TimerButton" Content="" Height="60" FontSize="36" FontWeight="Bold"/>
             <Button Content="Words Played"/>
-            <Grid Name="wordList" Height="Auto" Width="Auto">
-                <ListBox Name="wordsAlreadyPlayed" Height="Auto" VerticalAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <ListBox Name="wordsAlreadyPlayed" Height="Auto" VerticalAlignment="Top">
                 </ListBox>
-            </Grid>
+            </ScrollViewer>
         </StackPanel>
 
         <Grid DockPanel.Dock="Bottom" Margin="10">
