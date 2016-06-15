@@ -261,13 +261,26 @@ namespace WeGaService.models
 
                     //otherwise update user score and insert word and 
                     int score = Util.ComputeScore(wordPlayed);
+                    bool player1Ended = currentGame.player1_ended == null ? false : true;
+                    bool player2Ended = currentGame.player2_ended == null ? false : true;
+                    int player1Score = currentGame.player1_score == null ? 0 : currentGame.player1_score;
+                    int player2Score = currentGame.player2_score == null ? 0 : (int) currentGame.player2_score;
+
                     if (currentGame.player1_id == currentPlayer.id)
                     {
-                        currentGame.player1_score = (int)currentGame.player1_score + score;
+                        if (player1Ended)
+                        {
+                            throw new Exception("You have already ended this game");
+                        }
+                        currentGame.player1_score = player1Score + score;
                     }
                     else if (currentGame.player2_id == currentPlayer.id)
                     {
-                        currentGame.player2_score = (int)currentGame.player2_score + score;
+                        if (player2Ended)
+                        {
+                            throw new Exception("You have already ended this game");
+                        }
+                        currentGame.player2_score = player2Score + score;
                     }
                     else
                     {
@@ -362,7 +375,10 @@ namespace WeGaService.models
                                     join glh in db.game_letters_history on g.id equals glh.game_id
                                     into t
                                     from glh in t.DefaultIfEmpty()
-                                    where (g.player2_id == user.id && !g.game_neglected && (bool)!g.player2_ended)
+                                    join players in db.players on g.player1_id equals players.id
+                                    into x
+                                    from players in x.DefaultIfEmpty()
+                                    where (g.player2_id == user.id && !g.game_neglected && (g.player2_ended == null || g.player2_ended == false))
                                     orderby g.date_started
                                     select new
                                     {
@@ -373,6 +389,7 @@ namespace WeGaService.models
                                         g.player1_score,
                                         g.player2_score,
                                         g.date_ended,
+                                        g.date_started,
                                         g.game_neglected,
                                         g.player1_ended,
                                         g.player2_ended,
@@ -380,6 +397,7 @@ namespace WeGaService.models
                                         g.player1_end_time,
                                         g.player2_end_time,
                                         glh.letters,
+                                        players.nickname,
                                     }).ToList();
                     List<Dictionary<String, String>> response = new List<Dictionary<String, String>>();
 
@@ -394,6 +412,7 @@ namespace WeGaService.models
                         str.Add("player1_score", res.player1_score.ToString());
                         str.Add("player2_score", res.player2_score.ToString());
                         str.Add("date_ended", res.date_ended.ToString());
+                        str.Add("date_started", res.date_started.ToString());
                         str.Add("game_neglected", res.game_neglected.ToString());
                         str.Add("player1_ended", res.player1_ended.ToString());
                         str.Add("player2_ended", res.player2_ended.ToString());
@@ -401,6 +420,7 @@ namespace WeGaService.models
                         str.Add("player1_end_time", res.player1_end_time.ToString());
                         str.Add("player2_end_time", res.player2_end_time.ToString());
                         str.Add("letters", res.letters.ToString());
+                        str.Add("nickname", res.nickname.ToString());
                         response.Add(str);
                     }
                     return response;
@@ -425,7 +445,7 @@ namespace WeGaService.models
             var pl = db.players.FirstOrDefault(p => p.nickname == nickname);
             if (pl == null)
             {
-                throw new Exception("Invalid game id");
+                throw new Exception("Invalid nickname");
             }
 
             return pl;
@@ -442,7 +462,7 @@ namespace WeGaService.models
             var pl = db.players.FirstOrDefault(p => p.username == username);
             if (pl == null)
             {
-                throw new Exception("Invalid game id");
+                throw new Exception("Invalid nickname");
             }
 
             return pl;
@@ -547,14 +567,20 @@ namespace WeGaService.models
                         throw new Exception("This player is not playing this game");
                     }
 
-                    if ((bool)currentGame.player1_ended && (bool)currentGame.player2_ended && !currentGame.game_neglected)
+                    bool player1Ended = currentGame.player1_ended == null ? false : true;
+                    bool player2Ended = currentGame.player2_ended == null ? false : true;
+                    bool gameNotNeglected = !currentGame.game_neglected;
+                    int player1Score = currentGame.player1_score == null ? 0 : currentGame.player1_score;
+                    int player2Score = currentGame.player2_score == null ? 0 : (int)currentGame.player2_score;
+
+                    if (player1Ended && player2Ended && gameNotNeglected)
                     {
                         //game has ended, set winner
-                        if (currentGame.player1_score > (int)currentGame.player2_score)
+                        if (player1Score > player2Score)
                         {
                             currentGame.winner = currentGame.player1_id;
                         }
-                        else if (currentGame.player2_score > (int)currentGame.player1_id)
+                        else if (player2Score > player1Score)
                         {
                             currentGame.winner = currentGame.player2_id;
                         }
@@ -710,6 +736,34 @@ namespace WeGaService.models
             {
                 setErrorMessage(e);
                 return null;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public bool PingDatabase()
+        {
+            try
+            {
+                using (WegaEntities db = new WegaEntities())
+                {
+                    try
+                    {
+                        db.games.FirstOrDefault(g => g.id == 1);
+                        return true;
+                    }
+                    catch (Exception e)
+                    {
+                        return false;
+                    }
+                }
+            }
+            catch (DbEntityValidationException dbEx)
+            {
+                setErrorMessage(dbEx);
+                return false;
             }
         }
     }

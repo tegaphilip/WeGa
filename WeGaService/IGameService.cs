@@ -43,5 +43,8 @@ namespace WeGaService
 
         [OperationContract]
         Dictionary<String, double> GetLeaderBoard(string type);
+
+        [OperationContract]
+        bool PingDatabase();
     }
 }

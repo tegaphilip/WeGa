@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WeGa.library;
 
 namespace WeGa
 {
@@ -20,9 +21,12 @@ namespace WeGa
     /// </summary>
     public partial class MainWindow : Window
     {
+        private ServiceClient sc;
+
         public MainWindow()
         {
             InitializeComponent();
+            VerifyDatabaseConnection();
             CenterWindowOnScreen();
         }
 
@@ -60,6 +64,14 @@ namespace WeGa
             registerWindow.ShowDialog();
         }
 
-
+        private void VerifyDatabaseConnection()
+        {
+            sc = new ServiceClient();
+            if (!sc.Ping())
+            {
+                MessageBox.Show("Your database server is not running or cannot be reached");
+                this.Close();
+            }
+        }
     }
 }
