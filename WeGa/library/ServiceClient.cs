@@ -232,5 +232,22 @@ namespace WeGa.library
                 return false;
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="nickname"></param>
+        /// <returns></returns>
+        public Dictionary<string, string>[] GetResults(string nickname)
+        {
+            try
+            {
+                return proxy.GetResults(nickname);
+            }
+            catch
+            {
+                return null;
+            }
+        }
     }
 }

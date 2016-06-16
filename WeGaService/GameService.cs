@@ -36,6 +36,7 @@ namespace WeGaService
                 response["status"] = SUCCESS;
                 response["nickname"] = p.nickname;
                 response["username"] = p.username;
+                response["id"] = p.id.ToString();
             }
 
             return response;
@@ -218,6 +219,16 @@ namespace WeGaService
         public bool PingDatabase()
         {
             return new DBConn().PingDatabase();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="nickname"></param>
+        /// <returns></returns>
+        public List<Dictionary<string, string>> GetResults(string nickname)
+        {
+            return new DBConn().GetResults(nickname);
         }
     }
 }

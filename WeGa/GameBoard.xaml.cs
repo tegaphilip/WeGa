@@ -30,7 +30,7 @@ namespace WeGa
         private ServiceClient serviceClient;
         private int playerScore = 0;
         ArrayList wordsAlreadyPlayedArrayList = new ArrayList();
-        const int GAME_TIME = 120;
+        const int GAME_TIME = 60;
         bool timeUp;
         DispatcherTimer dispatcherTimer;
         TimeSpan timeSpan;

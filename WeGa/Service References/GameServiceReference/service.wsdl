@@ -79,6 +79,12 @@
   <wsdl:message name="IGameService_PingDatabase_OutputMessage">
     <wsdl:part name="parameters" element="tns:PingDatabaseResponse" />
   </wsdl:message>
+  <wsdl:message name="IGameService_GetResults_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetResults" />
+  </wsdl:message>
+  <wsdl:message name="IGameService_GetResults_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetResultsResponse" />
+  </wsdl:message>
   <wsdl:portType name="IGameService">
     <wsdl:operation name="Login">
       <wsdl:input wsaw:Action="http://tempuri.org/IGameService/Login" message="tns:IGameService_Login_InputMessage" />
@@ -127,6 +133,10 @@
     <wsdl:operation name="PingDatabase">
       <wsdl:input wsaw:Action="http://tempuri.org/IGameService/PingDatabase" message="tns:IGameService_PingDatabase_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IGameService/PingDatabaseResponse" message="tns:IGameService_PingDatabase_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetResults">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGameService/GetResults" message="tns:IGameService_GetResults_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGameService/GetResultsResponse" message="tns:IGameService_GetResults_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IGameService" type="tns:IGameService">
@@ -232,6 +242,15 @@
     </wsdl:operation>
     <wsdl:operation name="PingDatabase">
       <soap:operation soapAction="http://tempuri.org/IGameService/PingDatabase" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetResults">
+      <soap:operation soapAction="http://tempuri.org/IGameService/GetResults" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

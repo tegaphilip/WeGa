@@ -8,6 +8,7 @@
         <sys:String x:Key="username">Guest</sys:String>
         <sys:String x:Key="nickname">Guest</sys:String>
         <sys:String x:Key="gameLetters">Guest</sys:String>
+        <sys:String x:Key="id">Guest</sys:String>
         
         <!-- game Button style -->
         <Style x:Key="gameButtonStyle" TargetType="{x:Type Button}">

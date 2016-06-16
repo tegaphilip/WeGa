@@ -15,7 +15,7 @@ namespace WeGaService.models
     {
         public static String ErrorMessage = "";
 
-        const int GAME_TIME = 120;
+        const int GAME_TIME = 60;
 
         const string TYPE_LEADERBOARD_AVERAGE_SCORE = "a";
         const string TYPE_LEADERBOARD_TOTAL_SCORE = "t";
@@ -570,7 +570,7 @@ namespace WeGaService.models
                     bool player1Ended = currentGame.player1_ended == null ? false : true;
                     bool player2Ended = currentGame.player2_ended == null ? false : true;
                     bool gameNotNeglected = !currentGame.game_neglected;
-                    int player1Score = currentGame.player1_score == null ? 0 : currentGame.player1_score;
+                    int player1Score = currentGame.player1_score;
                     int player2Score = currentGame.player2_score == null ? 0 : (int)currentGame.player2_score;
 
                     if (player1Ended && player2Ended && gameNotNeglected)
@@ -699,33 +699,42 @@ namespace WeGaService.models
             {
                 using (WegaEntities db = new WegaEntities())
                 {
-                    List <player> players = db.players.ToList();
+                    List<player> players = db.players.ToList();
                     foreach (player p in players)
                     {
-                        List <game> gamesPlayedAndEnded = db.games
+                        List<game> gamesPlayedAndEnded = db.games
                             .Where(g => (g.player1_id == p.id || g.player2_id == p.id) && (g.winner != null))
                             .ToList();
 
                         int score = 0;
                         foreach (game eachGame in gamesPlayedAndEnded)
                         {
+                            int player1Score = eachGame.player1_score;
+                            int player2Score = eachGame.player2_score == null ? 0 : (int)eachGame.player2_score;
                             if (eachGame.player1_id == p.id)
                             {
-                                score += eachGame.player1_score;
+                                score += player1Score;
                             }
                             else if (eachGame.player2_id == p.id)
                             {
-                                score += (int) eachGame.player2_score;
+                                score += player2Score;
                             }
-
-                            if (type == TYPE_LEADERBOARD_AVERAGE_SCORE)
+                        }
+                        if (type == TYPE_LEADERBOARD_AVERAGE_SCORE)
+                        {
+                            if (gamesPlayedAndEnded.Count == 0)
                             {
-                                response.Add(p.nickname, score/gamesPlayedAndEnded.Count);
+                                response.Add(p.nickname, 0);
                             }
-                            else if (type == TYPE_LEADERBOARD_TOTAL_SCORE)
+                            else
                             {
-                                response.Add(p.nickname, score);
+                                response.Add(p.nickname, score / gamesPlayedAndEnded.Count);
                             }
+                            
+                        }
+                        else if (type == TYPE_LEADERBOARD_TOTAL_SCORE)
+                        {
+                            response.Add(p.nickname, score);
                         }
                     }
 
@@ -764,6 +773,80 @@ namespace WeGaService.models
             {
                 setErrorMessage(dbEx);
                 return false;
+            }
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="nickname"></param>
+        /// <returns></returns>
+        public List<Dictionary<String, String>> GetResults(String nickname)
+        {
+            try
+            {
+                using (WegaEntities db = new WegaEntities())
+                {
+                    var user = GetPlayerByNickname(nickname, db);
+
+                    var requests = (from g in db.games
+                                    join glh in db.game_letters_history on g.id equals glh.game_id
+                                    into t
+                                    from glh in t.DefaultIfEmpty()
+                                    join players in db.players on g.player1_id equals players.id
+                                    into x
+                                    from players in x.DefaultIfEmpty()
+                                    join players2 in db.players on g.player2_id equals players2.id
+                                    into y
+                                    from players2 in y.DefaultIfEmpty()
+                                    let nickname2 =  players2.nickname
+                                    where (g.player1_id == user.id || g.player2_id == user.id)
+                                    orderby g.date_started
+                                    select new
+                                    {
+                                        g.id,
+                                        g.player1_id,
+                                        g.player2_id,
+                                        g.winner,
+                                        g.player1_score,
+                                        g.player2_score,
+                                        g.date_ended,
+                                        g.date_started,
+                                        g.game_neglected,
+                                        g.game_time,
+                                        glh.letters,
+                                        players.nickname,
+                                        nickname2,
+                                    }).ToList();
+                    List<Dictionary<String, String>> response = new List<Dictionary<String, String>>();
+
+
+                    foreach (var res in requests)
+                    {
+                        Dictionary<String, String> str = new Dictionary<string, string>();
+                        str.Add("game_id", res.id.ToString());
+                        str.Add("player1_id", res.player2_id.ToString());
+                        str.Add("player2_id", res.player2_id.ToString());
+                        str.Add("winner", res.winner.ToString());
+                        str.Add("player1_score", res.player1_score.ToString());
+                        str.Add("player2_score", res.player2_score.ToString());
+                        str.Add("date_ended", res.date_ended.ToString());
+                        str.Add("date_started", res.date_started.ToString());
+                        str.Add("game_neglected", res.game_neglected.ToString());
+                        str.Add("game_time", res.game_time.ToString());
+                        str.Add("letters", res.letters.ToString());
+                        str.Add("nickname", res.nickname.ToString());
+                        str.Add("nickname2", res.nickname2.ToString());
+                        response.Add(str);
+                    }
+                    return response;
+                }
+            }
+            catch (Exception e)
+            {
+                setErrorMessage(e);
+                return null;
             }
         }
     }

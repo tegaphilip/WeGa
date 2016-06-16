@@ -86,6 +86,12 @@ namespace WeGa.GameServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/PingDatabase", ReplyAction="http://tempuri.org/IGameService/PingDatabaseResponse")]
         System.Threading.Tasks.Task<bool> PingDatabaseAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/GetResults", ReplyAction="http://tempuri.org/IGameService/GetResultsResponse")]
+        System.Collections.Generic.Dictionary<string, string>[] GetResults(string nickname);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/GetResults", ReplyAction="http://tempuri.org/IGameService/GetResultsResponse")]
+        System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, string>[]> GetResultsAsync(string nickname);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -209,6 +215,14 @@ namespace WeGa.GameServiceReference {
         
         public System.Threading.Tasks.Task<bool> PingDatabaseAsync() {
             return base.Channel.PingDatabaseAsync();
+        }
+        
+        public System.Collections.Generic.Dictionary<string, string>[] GetResults(string nickname) {
+            return base.Channel.GetResults(nickname);
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, string>[]> GetResultsAsync(string nickname) {
+            return base.Channel.GetResultsAsync(nickname);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -39,7 +40,7 @@ namespace WeGa
             {
                 parentWindow = new ParentWindow();
             }
-            
+
             return parentWindow;
         }
 
@@ -65,13 +66,13 @@ namespace WeGa
 
         private void Game_Request_Click(object sender, RoutedEventArgs e)
         {
-            String nickName = (string) Application.Current.Resources["nickname"];
+            String nickName = (string)Application.Current.Resources["nickname"];
             Dictionary<string, string>[] requests = serviceClient.GetGameRequests(nickName);
 
             PendingRequests pendingRequestsWindow = new PendingRequests(requests)
             {
-                ShowInTaskbar = false,        
-                Topmost = true,          
+                ShowInTaskbar = false,
+                Topmost = true,
                 ResizeMode = ResizeMode.NoResize,
                 Owner = ParentWindow.getParentWindow(),
             };
@@ -85,6 +86,45 @@ namespace WeGa
         {
             LeaderBoard lb = new LeaderBoard();
             lb.Show();
+        }
+
+        private void QuitMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void Game_Results_MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            ResultsWindow resultsWindow = new ResultsWindow()
+            {
+                ShowInTaskbar = false,
+                Topmost = true,
+                ResizeMode = ResizeMode.NoResize,
+                Owner = ParentWindow.getParentWindow(),
+            };
+
+            resultsWindow.Left = (Utils.getScreenWidth() / 2) - (resultsWindow.Width / 2);
+            resultsWindow.Top = (Utils.getScreenHeight() / 2) - (resultsWindow.Height / 2);
+            resultsWindow.ShowDialog();
+        }
+
+        private void Window_Closing(object sender, CancelEventArgs e)
+        {
+            if (!closeWindow())
+            {
+                e.Cancel = true;
+            }
+        }
+
+        private bool closeWindow()
+        {
+            MessageBoxResult result = MessageBox.Show("Confirm Exit?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }
