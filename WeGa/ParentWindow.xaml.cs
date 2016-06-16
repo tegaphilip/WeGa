@@ -82,12 +82,6 @@ namespace WeGa
             pendingRequestsWindow.ShowDialog();
         }
 
-        private void Game_Result_Click(object sender, RoutedEventArgs e)
-        {
-            LeaderBoard lb = new LeaderBoard();
-            lb.Show();
-        }
-
         private void QuitMenuItem_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
@@ -125,6 +119,21 @@ namespace WeGa
             }
 
             return false;
+        }
+
+        private void LeaderBoard_MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            LeaderBoard lb = new LeaderBoard()
+            {
+                ShowInTaskbar = false,
+                Topmost = true,
+                ResizeMode = ResizeMode.NoResize,
+                Owner = ParentWindow.getParentWindow(),
+            };
+
+            lb.Left = (Utils.getScreenWidth() / 2) - (lb.Width / 2);
+            lb.Top = (Utils.getScreenHeight() / 2) - (lb.Height / 2);
+            lb.ShowDialog(); ;
         }
     }
 }

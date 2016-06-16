@@ -3,37 +3,30 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="LeaderBoard" Height="300" Width="300">
     <Grid>
-        <TabControl>
+        <TabControl SelectionChanged="TabControl_SelectionChanged">
             <TabItem Header="Total">
-                <Grid ShowGridLines="True" Margin="5">
+                <Border BorderBrush="Black" BorderThickness="1">
+                <Grid Name="total" Margin="5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
-                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <ListBox Name="total_nickname" Height="100" Grid.Column="0"  VerticalAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-                        <ListBoxItem>Nickname</ListBoxItem>
-                    </ListBox>
-                    <ListBox Name="total_score" Height="100" Grid.Column="1" VerticalAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-                        <ListBoxItem>Score</ListBoxItem>
-                    </ListBox>
-                    <Label Name="label"  HorizontalAlignment="Left" Margin="53,136,0,0" VerticalAlignment="Top"/>
-                </Grid>
+                       
+                    </Grid>
+                </Border>
             </TabItem>
             <TabItem Header="Average">
-                <Grid ShowGridLines="True" Margin="5">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <ListBox Name="avg_nickname" Grid.Column="0" VerticalAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-                        <ListBoxItem>Nickname</ListBoxItem>
-                    </ListBox>
-                    <ListBox Name="avg_score" Grid.Column="1" VerticalAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-                        <ListBoxItem>Score</ListBoxItem>
-                    </ListBox>
-                </Grid>
-            </TabItem>
+                <Border BorderBrush="Black" BorderThickness="1">
+                    <Grid Name="average" Margin="5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                    </Grid>
+                </Border>
+            </TabItem>  
             <TabItem Header="Details" />
         </TabControl>
+        <Label Name="label" Content="Label" HorizontalAlignment="Left" Margin="56,176,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>
