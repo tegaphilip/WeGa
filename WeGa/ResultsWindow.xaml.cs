@@ -23,6 +23,8 @@ namespace WeGa
         private Dictionary<string, string>[] results;
         private ServiceClient serviceClient;
         private string filterType = "All";
+        private Dictionary<int, int> gameListMaps;
+        private ListBox listBox;
         public ResultsWindow()
         {
             InitializeComponent();
@@ -37,7 +39,6 @@ namespace WeGa
                 this.filterType = ((sender as TabControl).SelectedItem as TabItem).Header as string;
                 BuildResult();
             }
-            Details.Content = e.Source.ToString();
         }
 
         private void GetAndSetResults()
@@ -49,7 +50,8 @@ namespace WeGa
         private void BuildResult()
         {
             String id = (string)Application.Current.Resources["id"];
-            var listBox = allResults as ListBox;
+
+            listBox = allResults as ListBox;
             bool all = false, wins = false, pending = false, losses = false;
 
             if (this.filterType == "Wins")
@@ -75,6 +77,8 @@ namespace WeGa
 
             listBox.Items.Clear();
 
+            gameListMaps = new Dictionary<int, int>();
+
             if (results != null)
             {
                 int i = 0;
@@ -94,8 +98,7 @@ namespace WeGa
                     }
 
                     listBox.Items.Add(item);
-
-                    //requestsMap.Add(i, dic);
+                    gameListMaps.Add(i, int.Parse(result["game_id"]));
                     i++;
                 }
             }
@@ -103,7 +106,34 @@ namespace WeGa
 
         private void Details_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show(Details.Content.ToString());
+            int selectedIndex = listBox.SelectedIndex;
+            if (selectedIndex < 0)
+            {
+                MessageBox.Show("Select a game whose results you want to view");
+            }
+            else
+            {
+                int gameId = gameListMaps[selectedIndex];
+                Dictionary<string, string[]> details = serviceClient.GetGameInfo(gameId);
+                string gameLetters = serviceClient.GetGameLetters(gameId);
+                if (details == null)
+                {
+                    MessageBox.Show("The game details could not be retrieved", "Error");
+                }
+                else
+                {
+                    GameInformationWindow gameInformationWindow = new GameInformationWindow(details, gameLetters)
+                    {
+                        ShowInTaskbar = false,               // don't show the dialog on the taskbar
+                        Topmost = true,                      // ensure we're Always On Top
+                        ResizeMode = ResizeMode.NoResize,    // remove excess caption bar buttons
+                        Owner = this,
+                    };
+                    gameInformationWindow.Left = (Utils.getScreenWidth() / 2) - (gameInformationWindow.Width / 2);
+                    gameInformationWindow.Top = (Utils.getScreenHeight() / 2) - (gameInformationWindow.Height / 2);
+                    gameInformationWindow.ShowDialog();
+                }
+            }
         }
 
         private Grid GetContent(Dictionary<string, string> result, String id)

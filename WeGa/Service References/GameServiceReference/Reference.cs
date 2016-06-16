@@ -92,6 +92,18 @@ namespace WeGa.GameServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/GetResults", ReplyAction="http://tempuri.org/IGameService/GetResultsResponse")]
         System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, string>[]> GetResultsAsync(string nickname);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/GetGameDetails", ReplyAction="http://tempuri.org/IGameService/GetGameDetailsResponse")]
+        System.Collections.Generic.Dictionary<string, string[]> GetGameDetails(int gameId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/GetGameDetails", ReplyAction="http://tempuri.org/IGameService/GetGameDetailsResponse")]
+        System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, string[]>> GetGameDetailsAsync(int gameId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/GetGameLetters", ReplyAction="http://tempuri.org/IGameService/GetGameLettersResponse")]
+        string GetGameLetters(int gameId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/GetGameLetters", ReplyAction="http://tempuri.org/IGameService/GetGameLettersResponse")]
+        System.Threading.Tasks.Task<string> GetGameLettersAsync(int gameId);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -223,6 +235,22 @@ namespace WeGa.GameServiceReference {
         
         public System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, string>[]> GetResultsAsync(string nickname) {
             return base.Channel.GetResultsAsync(nickname);
+        }
+        
+        public System.Collections.Generic.Dictionary<string, string[]> GetGameDetails(int gameId) {
+            return base.Channel.GetGameDetails(gameId);
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, string[]>> GetGameDetailsAsync(int gameId) {
+            return base.Channel.GetGameDetailsAsync(gameId);
+        }
+        
+        public string GetGameLetters(int gameId) {
+            return base.Channel.GetGameLetters(gameId);
+        }
+        
+        public System.Threading.Tasks.Task<string> GetGameLettersAsync(int gameId) {
+            return base.Channel.GetGameLettersAsync(gameId);
         }
     }
 }

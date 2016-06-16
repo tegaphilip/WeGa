@@ -58,6 +58,9 @@
     <Compile Include="GameBoard.xaml.cs">
       <DependentUpon>GameBoard.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GameInformationWindow.xaml.cs">
+      <DependentUpon>GameInformationWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="library\Constants.cs" />
     <Compile Include="library\ServiceClient.cs" />
     <Compile Include="LoginWindow.xaml.cs">
@@ -88,6 +91,10 @@
       <DependentUpon>Test.xaml</DependentUpon>
     </Compile>
     <Page Include="GameBoard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GameInformationWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

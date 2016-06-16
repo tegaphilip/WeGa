@@ -263,7 +263,7 @@ namespace WeGaService.models
                     int score = Util.ComputeScore(wordPlayed);
                     bool player1Ended = currentGame.player1_ended == null ? false : true;
                     bool player2Ended = currentGame.player2_ended == null ? false : true;
-                    int player1Score = currentGame.player1_score == null ? 0 : currentGame.player1_score;
+                    int player1Score = currentGame.player1_score;
                     int player2Score = currentGame.player2_score == null ? 0 : (int) currentGame.player2_score;
 
                     if (currentGame.player1_id == currentPlayer.id)
@@ -454,6 +454,24 @@ namespace WeGaService.models
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="id"></param>
+        /// <param name="database"></param>
+        /// <returns></returns>
+        private player GetPlayerById(int id, WegaEntities database)
+        {
+            var db = database == null ? new WegaEntities() : database;
+            var pl = db.players.FirstOrDefault(p => p.id == id);
+            if (pl == null)
+            {
+                throw new Exception("Invalid player id");
+            }
+
+            return pl;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="username"></param>
         /// <returns></returns>
         private player GetPlayerByUsername(String username)
@@ -484,6 +502,24 @@ namespace WeGaService.models
             }
 
             return g;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="database"></param>
+        /// <returns></returns>
+        public string GetGameLetters(int gameId)
+        {
+            var db = new WegaEntities();
+            var g = db.game_letters_history.FirstOrDefault(p => p.game_id == gameId);
+            if (g == null)
+            {
+                throw new Exception("Invalid game id");
+            }
+
+            return g.letters;
         }
 
         /// <summary>
@@ -849,5 +885,48 @@ namespace WeGaService.models
                 return null;
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="gameId"></param>
+        /// <returns></returns>
+        public Dictionary<String, List<String>> GetGameDetails(int gameId)
+        {
+            try
+            {
+                using (WegaEntities db = new WegaEntities())
+                {
+                    var gameObject = GetGameById(gameId, db);
+                    var player1 = GetPlayerById(gameObject.player1_id, db);
+                    var player2 = GetPlayerById(gameObject.player2_id, db);
+
+                    var player1Words = (from gwh in db.game_words_history
+                                    join w in db.words on gwh.gwh_word_id equals w.id
+                                    into t
+                                    from w in t.DefaultIfEmpty()
+                                    where (gwh.gwh_player_id == gameObject.player1_id && gwh.gwh_game_id == gameObject.id)
+                                    orderby gwh.gwh_datetime
+                                    select w.word1).ToList();
+                    var player2Words = (from gwh in db.game_words_history
+                                join w in db.words on gwh.gwh_word_id equals w.id
+                                into t
+                                from w in t.DefaultIfEmpty()
+                                where (gwh.gwh_player_id == gameObject.player2_id && gwh.gwh_game_id == gameObject.id)
+                                orderby gwh.gwh_datetime
+                                select w.word1).ToList();
+                    Dictionary<String, List<String>> response = new Dictionary<String, List<String>>();
+                    response.Add(player1.nickname, player1Words);
+                    response.Add(player2.nickname, player2Words);
+                    return response;
+                }
+            }
+            catch (Exception e)
+            {
+                setErrorMessage(e);
+                return null;
+            }
+        }
+
     }
 }
