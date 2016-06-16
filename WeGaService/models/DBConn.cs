@@ -570,7 +570,7 @@ namespace WeGaService.models
                     bool player1Ended = currentGame.player1_ended == null ? false : true;
                     bool player2Ended = currentGame.player2_ended == null ? false : true;
                     bool gameNotNeglected = !currentGame.game_neglected;
-                    int player1Score = currentGame.player1_score == null ? 0 : currentGame.player1_score;
+                    int player1Score = currentGame.player1_score;
                     int player2Score = currentGame.player2_score == null ? 0 : (int)currentGame.player2_score;
 
                     if (player1Ended && player2Ended && gameNotNeglected)
@@ -699,33 +699,42 @@ namespace WeGaService.models
             {
                 using (WegaEntities db = new WegaEntities())
                 {
-                    List <player> players = db.players.ToList();
+                    List<player> players = db.players.ToList();
                     foreach (player p in players)
                     {
-                        List <game> gamesPlayedAndEnded = db.games
+                        List<game> gamesPlayedAndEnded = db.games
                             .Where(g => (g.player1_id == p.id || g.player2_id == p.id) && (g.winner != null))
                             .ToList();
 
                         int score = 0;
                         foreach (game eachGame in gamesPlayedAndEnded)
                         {
+                            int player1Score = eachGame.player1_score;
+                            int player2Score = eachGame.player2_score == null ? 0 : (int)eachGame.player2_score;
                             if (eachGame.player1_id == p.id)
                             {
-                                score += eachGame.player1_score;
+                                score += player1Score;
                             }
                             else if (eachGame.player2_id == p.id)
                             {
-                                score += (int) eachGame.player2_score;
+                                score += player2Score;
                             }
-
-                            if (type == TYPE_LEADERBOARD_AVERAGE_SCORE)
+                        }
+                        if (type == TYPE_LEADERBOARD_AVERAGE_SCORE)
+                        {
+                            if (gamesPlayedAndEnded.Count == 0)
                             {
-                                response.Add(p.nickname, score/gamesPlayedAndEnded.Count);
+                                response.Add(p.nickname, 0);
                             }
-                            else if (type == TYPE_LEADERBOARD_TOTAL_SCORE)
+                            else
                             {
-                                response.Add(p.nickname, score);
+                                response.Add(p.nickname, score / gamesPlayedAndEnded.Count);
                             }
+                            
+                        }
+                        else if (type == TYPE_LEADERBOARD_TOTAL_SCORE)
+                        {
+                            response.Add(p.nickname, score);
                         }
                     }
 
