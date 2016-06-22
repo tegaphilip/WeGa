@@ -20,10 +20,10 @@ namespace WeGa
     /// </summary>
     public partial class LeaderBoard : Window
     {
-
+        Boolean clicked = false;
         private ServiceClient sc;
         Dictionary<String, double> listOfScore;
-        private string filterType = "Average";
+        private string filterType = "Total";
 
         public LeaderBoard()
         {
@@ -37,7 +37,7 @@ namespace WeGa
 
             if (e.Source is TabControl)
             {
-                this.filterType = ((sender as TabControl).SelectedItem as TabItem).Header as string; 
+                this.filterType = ((sender as TabControl).SelectedItem as TabItem).Header as string;
                 GetAndSetContent();
             }
         }
@@ -48,13 +48,10 @@ namespace WeGa
             {
                 case "Total":
                     listOfScore = sc.GetLeaderBoard(Constants.TYPE_LEADERBOARD_TOTAL_SCORE);
-                    //listOfScore = from entry in listOfScore orderby entry.Value ascending select entry;
-                    //List<Order> SortedList = objListOrder.OrderBy(o=>o.OrderDate).ToList();
-                    //var sort = dicts.OrderBy(x => x.ContainsKey("Title") ? x["Title"] : string.Empty);
-                    //from entry in myDict orderby entry.Value ascending select entry;
                     setContent(listOfScore);
                     break;
                 case "Average":
+
                     listOfScore = sc.GetLeaderBoard(Constants.TYPE_LEADERBOARD_AVERAGE_SCORE);
                     setContent(listOfScore);
                     break;
@@ -72,7 +69,12 @@ namespace WeGa
             else
             {
                 CreateTitleRow();
-                foreach (KeyValuePair<String, double> p in listOfScore.OrderByDescending(x=>x.Value))
+                if (filterType == "Average")
+                {
+                    var element = (Button)average.Children.Cast<UIElement>().FirstOrDefault(x => Grid.GetColumn(x) == 1 && Grid.GetRow(x) == 0);
+                    element.Content = "Average Score";
+                }
+                foreach (KeyValuePair<String, double> p in listOfScore)
                 {
                     var grid = GetChosenGrid();   
                     TextBlock nickname = new TextBlock();                  
@@ -108,9 +110,11 @@ namespace WeGa
 
             Button nickname = new Button();
             nickname.Content = "Nickname";
-            nickname.Click += nickname_Click;
-            TextBlock totalScore = new TextBlock();
-            totalScore.Text = "Total Score";
+            nickname.Click += btn_Clicked;
+
+            Button totalScore = new Button();
+            totalScore.Content = "Total Score";
+            totalScore.Click += btn_Clicked;
 
             Grid.SetRow(nickname, 0);
             Grid.SetRow(totalScore, 0);
@@ -121,11 +125,30 @@ namespace WeGa
             grid.Children.Add(totalScore);
         }
 
-        private void nickname_Click(object sender, RoutedEventArgs e)
+        private void btn_Clicked(object sender, RoutedEventArgs e)
         {
-            var sorted = listOfScore.OrderBy(x => x.Key);
-            listOfScore = (Dictionary<string,double>) sorted;
+            Button btn_Clicked = (Button)sender;
+            var sorted = (IOrderedEnumerable<KeyValuePair<string,double>>)null;
+            if (btn_Clicked.Content.ToString() == "Nickname")
+            {
+                sorted = listOfScore.OrderByDescending(x => x.Key);
+                if (clicked)
+                {
+                    sorted = listOfScore.OrderBy(x => x.Key);
+                }
+            }
+            else if(btn_Clicked.Content.ToString() == "Total Score")
+            {
+                sorted = listOfScore.OrderByDescending(x => x.Value);
+                if (clicked)
+                {
+                    sorted = listOfScore.OrderBy(x => x.Value);
+                }
+            }
+            listOfScore = sorted.ToDictionary(pair => pair.Key, pair => pair.Value);
+            label.Content = clicked;
             setContent(listOfScore);
+            clicked = !clicked;
         }
 
         private Grid GetChosenGrid()
