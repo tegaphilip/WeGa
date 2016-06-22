@@ -22,10 +22,10 @@ namespace WeGa.GameServiceReference {
         System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, string>> LoginAsync(string username, string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/RegisterPlayer", ReplyAction="http://tempuri.org/IGameService/RegisterPlayerResponse")]
-        bool RegisterPlayer(string username, string nickname, string password);
+        System.Collections.Generic.Dictionary<string, string> RegisterPlayer(string username, string nickname, string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/RegisterPlayer", ReplyAction="http://tempuri.org/IGameService/RegisterPlayerResponse")]
-        System.Threading.Tasks.Task<bool> RegisterPlayerAsync(string username, string nickname, string password);
+        System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, string>> RegisterPlayerAsync(string username, string nickname, string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/GetPlayerNicknames", ReplyAction="http://tempuri.org/IGameService/GetPlayerNicknamesResponse")]
         string[] GetPlayerNicknames();
@@ -141,11 +141,11 @@ namespace WeGa.GameServiceReference {
             return base.Channel.LoginAsync(username, password);
         }
         
-        public bool RegisterPlayer(string username, string nickname, string password) {
+        public System.Collections.Generic.Dictionary<string, string> RegisterPlayer(string username, string nickname, string password) {
             return base.Channel.RegisterPlayer(username, nickname, password);
         }
         
-        public System.Threading.Tasks.Task<bool> RegisterPlayerAsync(string username, string nickname, string password) {
+        public System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, string>> RegisterPlayerAsync(string username, string nickname, string password) {
             return base.Channel.RegisterPlayerAsync(username, nickname, password);
         }
         

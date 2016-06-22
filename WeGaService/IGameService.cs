@@ -15,7 +15,7 @@ namespace WeGaService
         Dictionary<String, String> Login(string username, string password);
 
         [OperationContract]
-        bool RegisterPlayer(string username, string nickname, string password);
+        Dictionary<String, String> RegisterPlayer(string username, string nickname, string password);
 
         [OperationContract]
         List<string> GetPlayerNicknames();
