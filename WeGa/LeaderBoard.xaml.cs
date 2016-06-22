@@ -72,7 +72,7 @@ namespace WeGa
             else
             {
                 CreateTitleRow();
-                foreach (KeyValuePair<String, double> p in listOfScore)
+                foreach (KeyValuePair<String, double> p in listOfScore.OrderByDescending(x=>x.Value))
                 {
                     var grid = GetChosenGrid();   
                     TextBlock nickname = new TextBlock();                  
