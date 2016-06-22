@@ -58,6 +58,9 @@
     <Compile Include="GameBoard.xaml.cs">
       <DependentUpon>GameBoard.xaml</DependentUpon>
     </Compile>
+    <Compile Include="LeaderBoard.xaml.cs">
+      <DependentUpon>LeaderBoard.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GameInformationWindow.xaml.cs">
       <DependentUpon>GameInformationWindow.xaml</DependentUpon>
     </Compile>
@@ -83,6 +86,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="text.cs" />
     <Compile Include="Utils.cs" />
     <Compile Include="RequestWindow.xaml.cs">
       <DependentUpon>RequestWindow.xaml</DependentUpon>
@@ -91,6 +95,10 @@
       <DependentUpon>Test.xaml</DependentUpon>
     </Compile>
     <Page Include="GameBoard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LeaderBoard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

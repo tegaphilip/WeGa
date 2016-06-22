@@ -1,0 +1,32 @@
+﻿<Window x:Class="WeGa.LeaderBoard"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="LeaderBoard" Height="300" Width="300">
+    <Grid>
+        <TabControl SelectionChanged="TabControl_SelectionChanged">
+            <TabItem Header="Total">
+                <Border BorderBrush="Black" BorderThickness="1">
+                <Grid Name="total" Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                       
+                    </Grid>
+                </Border>
+            </TabItem>
+            <TabItem Header="Average">
+                <Border BorderBrush="Black" BorderThickness="1">
+                    <Grid Name="average" Margin="5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                    </Grid>
+                </Border>
+            </TabItem>  
+            <TabItem Header="Details" />
+        </TabControl>
+        <Label Name="label" Content="Label" HorizontalAlignment="Left" Margin="56,176,0,0" VerticalAlignment="Top"/>
+    </Grid>
+</Window>
