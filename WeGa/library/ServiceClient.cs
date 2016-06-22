@@ -232,5 +232,56 @@ namespace WeGa.library
                 return false;
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="nickname"></param>
+        /// <returns></returns>
+        public Dictionary<string, string>[] GetResults(string nickname)
+        {
+            try
+            {
+                return proxy.GetResults(nickname);
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="gameId"></param>
+        /// <returns></returns>
+        public Dictionary<string, string[]> GetGameInfo(int gameId)
+        {
+            try
+            {
+                return proxy.GetGameDetails(gameId);
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="gameId"></param>
+        /// <returns></returns>
+        public string GetGameLetters(int gameId)
+        {
+            try
+            {
+                return proxy.GetGameLetters(gameId);
+            }
+            catch
+            {
+                return null;
+            }
+        }
     }
 }

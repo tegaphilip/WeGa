@@ -41,8 +41,6 @@ namespace WeGa
             } while (letters.Length < 7);
 
             return new string(letters.ToCharArray().OrderBy(s => (rnd.Next(2) % 2) == 0).ToArray());
-
-            //return letters;
         }
 
         public static string[] RandomizeStrings(string[] arr)

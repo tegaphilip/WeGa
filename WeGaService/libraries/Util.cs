@@ -48,7 +48,11 @@ namespace WeGaService.libraries
             int score = word.Length * 10;
             if (word.Length == 7)
             {
-                score += 70;
+                score += 50;
+            }
+            else if (word.Length == 6)
+            {
+                score += 25;
             }
 
             return score;

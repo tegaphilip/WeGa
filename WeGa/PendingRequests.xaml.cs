@@ -114,7 +114,7 @@ namespace WeGa
         private Dictionary<string, string> getSelectedRequest()
         {
             int selectedIndex = requestList.SelectedIndex;
-            if (selectedIndex < 0 || selectedIndex == null)
+            if (selectedIndex < 0)
             {
                 return null;
             }
