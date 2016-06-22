@@ -38,7 +38,7 @@ namespace WeGa
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             int selectedIndex = playerList.SelectedIndex;
-            if (selectedIndex <= 0 || selectedIndex == null)
+            if (selectedIndex <= 0)
             {
                 MessageBox.Show("Please select a player");
                 return;

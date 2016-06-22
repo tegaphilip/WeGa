@@ -49,5 +49,11 @@ namespace WeGaService
 
         [OperationContract]
         List<Dictionary<String, String>> GetResults(String nickname);
+
+        [OperationContract]
+        Dictionary<String, List<String>> GetGameDetails(int gameId);
+
+        [OperationContract]
+        string GetGameLetters(int gameId);
     }
 }

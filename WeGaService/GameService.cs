@@ -230,5 +230,25 @@ namespace WeGaService
         {
             return new DBConn().GetResults(nickname);
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="gameId"></param>
+        /// <returns></returns>
+        public Dictionary<string, List<string>> GetGameDetails(int gameId)
+        {
+            return new DBConn().GetGameDetails(gameId);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="gameId"></param>
+        /// <returns></returns>
+        public string GetGameLetters(int gameId)
+        {
+            return new DBConn().GetGameLetters(gameId);
+        }
     }
 }
