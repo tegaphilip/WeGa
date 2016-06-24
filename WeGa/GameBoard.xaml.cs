@@ -112,6 +112,7 @@ namespace WeGa
             if (isPlayed(wordPlayed))
             {
                 MessageBox.Show("Word previously played");
+                effectReset();
                 return;
             }
 
@@ -120,6 +121,7 @@ namespace WeGa
             {
                 String errorMessage = response.ContainsKey("message") ? response["message"] : "an unknown error occurred";
                 MessageBox.Show(errorMessage);
+                effectReset();
                 return;
             }
 
