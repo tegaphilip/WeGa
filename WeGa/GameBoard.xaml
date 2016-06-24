@@ -56,7 +56,6 @@
             </ScrollViewer>
         </StackPanel>
 
-        <Label Content="Message:" DockPanel.Dock="Top" Name="message"/>
         <Grid Name="wordPanel" DockPanel.Dock="Top" Margin="0,70,0,0">
             <Grid.RowDefinitions>
                 <RowDefinition />
