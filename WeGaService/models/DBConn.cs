@@ -65,16 +65,15 @@ namespace WeGaService.models
             try
             {
                 using (WegaEntities db = new WegaEntities())
-                {
-
-                    var guy = GetPlayerByNickname(nickname, db);
+                { 
+                    var guy = db.players.FirstOrDefault(pl => pl.nickname == nickname);
                     if (guy != null)
                     {
                         setErrorMessage("The nickname already exists");
                         return false;
                     }
 
-                    guy = GetPlayerByUsername(username);
+                    guy = db.players.FirstOrDefault(pl => pl.username == username);
                     if (guy != null)
                     {
                         setErrorMessage("The username already exists");
