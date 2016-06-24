@@ -48,12 +48,18 @@ namespace WeGa
             else
             {
                 ServiceClient sc = new ServiceClient();
-                bool res = sc.Register(username.Text.Trim(), password.Password.Trim(), nickname.Text.Trim());
-
-                MessageBoxButton mbb = new MessageBoxButton();
-                MessageBox.Show(this, res.ToString(), "You've registered sucessfully!~\n"+"Click OK to login!~", mbb);
+                Dictionary<String, String> response = sc.Register(username.Text.Trim(), password.Password.Trim(), nickname.Text.Trim());
+                if (response == null || response["status"] == Constants.ERROR)
+                {
+                    String errorMessage = response.ContainsKey("message") ? response["message"] : "an unknown error occurred";
+                    message.Content = errorMessage;
+                    MessageBox.Show(errorMessage, "ERROR");
+                }
+                else
+                {
+                    MessageBox.Show("You've registered sucessfully!\n" + "You can now login");
+                }
                 this.Close();
-
             }
 
         }

@@ -46,7 +46,7 @@ namespace WeGa.library
         /// <param name="password"></param>
         /// <param name="nickname"></param>
         /// <returns></returns>
-        public bool Register(string username, string password, string nickname)
+        public Dictionary<String, String> Register(string username, string password, string nickname)
         {
             try
             {
@@ -54,7 +54,7 @@ namespace WeGa.library
             }
             catch
             {
-                return false;
+                return null;
             }
         }
 

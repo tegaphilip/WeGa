@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="28518c65601b45ab887a82674a4cb7f9" Name="Diagram1">
+      <Diagram DiagramId="1639a79a456941e9b6b41c5970588af8" Name="Diagram1">
         <EntityTypeShape EntityType="WegaModel.game_letters_history" Width="1.5" PointX="5.25" PointY="7.5" IsExpanded="true" />
         <EntityTypeShape EntityType="WegaModel.game_words_history" Width="1.5" PointX="5.25" PointY="4" IsExpanded="true" />
         <EntityTypeShape EntityType="WegaModel.game" Width="1.5" PointX="3" PointY="6.125" IsExpanded="true" />

@@ -49,9 +49,22 @@ namespace WeGaService
         /// <param name="nickname"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        public bool RegisterPlayer(string username, string nickname, string password)
+        public Dictionary<String, String> RegisterPlayer(string username, string nickname, string password)
         {
-            return new DBConn().Register(username, nickname, password);
+            Dictionary<String, String> response = new Dictionary<string, string>();
+            response["status"] = ERROR;
+
+            var p = new DBConn().Register(username, nickname, password);
+            if (!p)
+            {
+                response["message"] = DBConn.getLatestErrorMessage();
+            }
+            else
+            {
+                response["status"] = SUCCESS;
+            }
+
+            return response;
         }
 
         /// <summary>
