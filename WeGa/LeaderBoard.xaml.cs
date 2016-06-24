@@ -137,7 +137,7 @@ namespace WeGa
                     sorted = listOfScore.OrderBy(x => x.Key);
                 }
             }
-            else if(btn_Clicked.Content.ToString() == "Total Score")
+            else if (btn_Clicked.Content.ToString() == "Total Score" || btn_Clicked.Content.ToString() == "Average Score")
             {
                 sorted = listOfScore.OrderByDescending(x => x.Value);
                 if (clicked)
@@ -146,7 +146,6 @@ namespace WeGa
                 }
             }
             listOfScore = sorted.ToDictionary(pair => pair.Key, pair => pair.Value);
-            label.Content = clicked;
             setContent(listOfScore);
             clicked = !clicked;
         }
