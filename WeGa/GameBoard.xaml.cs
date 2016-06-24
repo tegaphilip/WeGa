@@ -241,7 +241,6 @@ namespace WeGa
             {
                 alert = "Time's up. \n" + alert;
             }
-            message.Content = alert;
 
             Dictionary<string, string> response = serviceClient.EndGame(this.gameId, currentPlayer);
             if (response == null || response["status"] == Constants.ERROR)
@@ -287,6 +286,7 @@ namespace WeGa
             MessageBoxResult result = MessageBox.Show("Do you want to resign this game? It will count as a loss", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (result == MessageBoxResult.Yes)
             {
+                dispatcherTimer.Stop();
                 Dictionary<string, string> response = serviceClient.ResignGame(this.gameId, currentPlayer);
                 if (response == null || response["status"] == Constants.ERROR)
                 {
