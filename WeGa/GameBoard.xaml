@@ -6,11 +6,11 @@
     <DockPanel>
         <Grid DockPanel.Dock="Top" Margin="5" Height="60">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="120"/>
-                <ColumnDefinition Width="120"/>
-                <ColumnDefinition Width="120"/>
-                <ColumnDefinition Width="120"/>
-                <ColumnDefinition Width="120"/>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="150"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="60" />
@@ -19,7 +19,7 @@
             <Button Grid.Column="1" Grid.Row="0" Content="0" Name="playerScoreButton" Style="{StaticResource ContestButtonStyle}"/>
             <Button Grid.Column="2" Grid.Row="0" Content="VS" Name="ContestButton2" Style="{StaticResource ContestButtonStyle}"/>
             <Button Grid.Column="3" Grid.Row="0" Content="***" Name="opponentScoreButton" Style="{StaticResource ContestButtonStyle}"/>
-            <Button Grid.Column="4" Grid.Row="0" Content="opponent" Name="opponentButton" Style="{StaticResource ContestButtonStyle}"/>
+            <Button Grid.Column="4" Grid.Row="0" Content="opponent" Name="opponentButton" Style="{StaticResource ContestButtonStyle}" HorizontalAlignment="Left"/>
         </Grid>
         
         <StackPanel DockPanel.Dock="Left" Height="Auto" Margin="5" VerticalAlignment="Center">
@@ -37,13 +37,13 @@
                     <RowDefinition Height="30" />
                     <RowDefinition Height="30" />
                 </Grid.RowDefinitions>
-                <Button Grid.Row="0"  Click="btn_Letter_Click" />
-                <Button Grid.Row="1"  Click="btn_Letter_Click" />
-                <Button Grid.Row="2"  Click="btn_Letter_Click" />
-                <Button Grid.Row="3"  Click="btn_Letter_Click" />
-                <Button Grid.Row="4"  Click="btn_Letter_Click" />
-                <Button Grid.Row="5"  Click="btn_Letter_Click" />
-                <Button Grid.Row="6"  Click="btn_Letter_Click" />
+                <Button Grid.Row="0"  Click="btn_Letter_Click" Style="{StaticResource gameBoardListButtonStyle}"/>
+                <Button Grid.Row="1"  Click="btn_Letter_Click" Style="{StaticResource gameBoardListButtonStyle}"/>
+                <Button Grid.Row="2"  Click="btn_Letter_Click" Style="{StaticResource gameBoardListButtonStyle}"/>
+                <Button Grid.Row="3"  Click="btn_Letter_Click" Style="{StaticResource gameBoardListButtonStyle}"/>
+                <Button Grid.Row="4"  Click="btn_Letter_Click" Style="{StaticResource gameBoardListButtonStyle}"/>
+                <Button Grid.Row="5"  Click="btn_Letter_Click" Style="{StaticResource gameBoardListButtonStyle}"/>
+                <Button Grid.Row="6"  Click="btn_Letter_Click" Style="{StaticResource gameBoardListButtonStyle}"/>
             </Grid>
         </StackPanel>
 
@@ -56,12 +56,8 @@
             </ScrollViewer>
         </StackPanel>
 
-        <Grid DockPanel.Dock="Bottom" Margin="10">
-            <Button Content="bottom"/>
-        </Grid>
-
         <Label Content="Message:" DockPanel.Dock="Top" Name="message"/>
-        <Grid Name="wordPanel" ShowGridLines="True" DockPanel.Dock="Top" Margin="0,70,0,0">
+        <Grid Name="wordPanel" DockPanel.Dock="Top" Margin="0,70,0,0">
             <Grid.RowDefinitions>
                 <RowDefinition />
             </Grid.RowDefinitions>
@@ -76,18 +72,18 @@
                 <ColumnDefinition Width="5"/>
             </Grid.ColumnDefinitions>
 
-            <Button Grid.Column="0" Content=""  Click="btn_word_Click"/>
-            <Button Grid.Column="1" Content=""  Click="btn_word_Click"/>
-            <Button Grid.Column="2" Content=""  Click="btn_word_Click"/>
-            <Button Grid.Column="3" Content=""  Click="btn_word_Click"/>
-            <Button Grid.Column="4" Content=""  Click="btn_word_Click"/>
-            <Button Grid.Column="5" Content=""  Click="btn_word_Click"/>
-            <Button Grid.Column="6" Content=""  Click="btn_word_Click"/>
-            <Button Grid.Column="7" Content=""  Click="btn_word_Click"/>
+            <Button Grid.Column="0" Content=""  Click="btn_word_Click" Style="{StaticResource gameBoardButtonStyle}"/>
+            <Button Grid.Column="1" Content=""  Click="btn_word_Click" Style="{StaticResource gameBoardButtonStyle}"/>
+            <Button Grid.Column="2" Content=""  Click="btn_word_Click" Style="{StaticResource gameBoardButtonStyle}"/>
+            <Button Grid.Column="3" Content=""  Click="btn_word_Click" Style="{StaticResource gameBoardButtonStyle}"/>
+            <Button Grid.Column="4" Content=""  Click="btn_word_Click" Style="{StaticResource gameBoardButtonStyle}"/>
+            <Button Grid.Column="5" Content=""  Click="btn_word_Click" Style="{StaticResource gameBoardButtonStyle}"/>
+            <Button Grid.Column="6" Content=""  Click="btn_word_Click" Style="{StaticResource gameBoardButtonStyle}"/>
+            <Button Grid.Column="7" Content=""  Click="btn_word_Click" Style="{StaticResource gameBoardButtonStyle}"/>
             <Button Grid.Column="8" Content=""/>
         </Grid>
-        <Button Content="Reset" Click="btnReset_Click" Width="70" Height="30"  />
-        <Button Content="Send Word" Click="btnAdd_Click" Width="70" Height="30" />
-        <Button Content="Resign" Width="70" Height="30" Click="btnResign_Click"/>
+        <Button Content="RESET" Click="btnReset_Click" Width="100" Height="30" Margin="0,0,30,0" Background="Orange" Foreground="White" FontWeight="Bold"/>
+        <Button Content="SEND WORD" Click="btnAdd_Click" Width="100" Height="30" Background="Blue" Foreground="White" FontWeight="Bold"/>
+        <Button Content="RESIGN" Width="100" Click="btnResign_Click" Height="30" Background="Red" Foreground="White" FontWeight="Bold"/>
     </DockPanel>
 </Window>

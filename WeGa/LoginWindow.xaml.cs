@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -26,6 +27,15 @@ namespace WeGa
         public LoginWindow()
         {
             InitializeComponent();
+            SystemSounds.Asterisk.Play();
+            System.Threading.Thread.Sleep(2000);
+            SystemSounds.Beep.Play();
+            System.Threading.Thread.Sleep(2000);
+            SystemSounds.Exclamation.Play();
+            System.Threading.Thread.Sleep(2000);
+            SystemSounds.Hand.Play();
+            System.Threading.Thread.Sleep(2000);
+            SystemSounds.Question.Play();
         }
 
         /// <summary>

@@ -9,7 +9,7 @@
         <sys:String x:Key="nickname">Guest</sys:String>
         <sys:String x:Key="gameLetters">Guest</sys:String>
         <sys:String x:Key="id">Guest</sys:String>
-        
+
         <!-- game Button style -->
         <Style x:Key="gameButtonStyle" TargetType="{x:Type Button}">
             <Setter Property="Width" Value="125" />
@@ -20,7 +20,7 @@
             <Setter Property="Background" Value="Gray" />
             <Setter Property="Label.FontFamily" Value="Trebuchet MS"></Setter>
             <Setter Property="Label.FontSize" Value="18"></Setter>
-           
+
         </Style>
 
         <!-- Login Textbox Style style -->
@@ -56,7 +56,74 @@
         <!-- game Button style -->
         <Style x:Key="ContestButtonStyle" TargetType="{x:Type Button}">
             <Setter Property="Label.FontFamily" Value="Lucida Sans Italic"></Setter>
-            <Setter Property="Label.FontSize" Value="24"></Setter>
+            <Setter Property="Label.FontSize" Value="19"></Setter>
         </Style>
+
+        <LinearGradientBrush x:Key="GrayBlueGradientBrush" 
+    StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="DarkGray" Offset="0" />
+            <GradientStop Color="#CCCCFF" Offset="0.5" />
+            <GradientStop Color="DarkGray" Offset="1" />
+        </LinearGradientBrush>
+
+        <!-- Button style -->
+        <Style x:Key="gameBoardButtonStyle" TargetType="{x:Type Button}">
+            <Setter Property="Width" Value="90" />
+            <Setter Property="Height" Value="40" />
+            <Setter Property="Background" 
+      Value="{StaticResource GrayBlueGradientBrush}" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="Label.FontSize" Value="24"></Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border" 
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    Padding="{TemplateBinding Padding}" 
+                    BorderBrush="{TemplateBinding BorderBrush}" 
+                    CornerRadius="1" 
+                    Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+                            <!--TODO: Set the right colors-->
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="DarkGray" />
+                                <Setter Property="Foreground" Value="Black" />
+                                <Setter Property="BorderThickness" Value="1,1,2,2" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Button style -->
+        <Style x:Key="gameBoardListButtonStyle" TargetType="{x:Type Button}">
+            <Setter Property="Width" Value="100" />
+            <Setter Property="Background" 
+      Value="{StaticResource GrayBlueGradientBrush}" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="Label.FontSize" Value="24"></Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border" 
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    Padding="{TemplateBinding Padding}" 
+                    BorderBrush="{TemplateBinding BorderBrush}" 
+                    CornerRadius="1" 
+                    Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
     </Application.Resources>
 </Application>
